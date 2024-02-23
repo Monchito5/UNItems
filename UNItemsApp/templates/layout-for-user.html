@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='scss/bg-color.scss')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='scss/custom.scss')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='scss/variables.scss')}}">
+  <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
+  <title>{% block titulo %} {% endblock %}</title>
+</head>
+  {% block css %}{% endblock %}
+  
+<!-- ================================ -->
+<!-- BARRA DE NAVEGACIÓN -->
+<!-- ================================ -->
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">              
+    <a href="/"><img src="{{url_for('static', filename='assets/number-six-icon.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>       
+    <a class="navbar-brand" href="#">Numero 006</a><a href="/" tabindex="-1"><i class="fa-solid fa-house-user"></i></i> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menú
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item">
+              {% if current_user.is_anonymous %}
+                <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
+              {% else %}
+              <p></p>
+              {% endif %}
+              </a>
+            </li>
+            <li><a class="dropdown-item">
+              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
+              </a>
+            </li>
+            <li><a class="dropdown-item">
+              {% if current_user.is_anonymous %}
+              <p></p>
+              {% else %}
+              <a class="dropdown-item" aria-current="page" href="{{ ('/logout') }}">Cerrar Sesión</a>
+              {% endif %}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link disabled">Salud mental, la prioridad de tu felicidad</a>
+        </li>
+        {% if current_user.username=="MrSylar" %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
+        </li>
+        {% else %}
+        <p></p>
+        {% endif %}
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+  </nav>
+
+{% block contenido %} {% endblock %}  
+
+
+<!-- ======================= -->
+<!-- FOOTER -->
+<!-- ======================= -->
+<div class="footer-lyt">
+  <footer class="footer"  style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+    
+        <!-- Twitter -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-twitter"></i
+        ></a>
+    
+        <!-- Google -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-google"></i
+        ></a>
+    
+        <!-- Instagram -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-instagram"></i
+        ></a>
+    
+        <!-- Linkedin -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <!-- Github -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+    
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+    </footer>
+  </div>
+{% block js %}{% endblock %}
+</html>

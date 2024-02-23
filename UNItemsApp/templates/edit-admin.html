@@ -1,0 +1,94 @@
+{% extends "layout-for-login.html" %}
+{% block titulo %} Admin - Editar Usuario {% endblock %}
+
+{% block css %}
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/profile-styles.css')}}">
+{% endblock %}
+
+{% block contenido %}
+<body>
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+          <div class="content">
+                    <h3>Operaciones como administrador</h3>
+                    <p>
+                      Editar a un usuario
+                    </p>
+                  </div>
+                </div>
+              <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                  <div class="wrap">
+                      <div class="img bg-img"></div>
+                        <div class="login-wrap p-4 p-md-5">
+                          <div class="d-flex">
+                <div class="mt-5 py-5">
+                {% for row in user %}
+                <form action="/edit-user/{{row.0}}" class="sign-up-form" method="post" enctype="multipart/form-data">
+                  <h2 class="title">Edición de usuario</h2>
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="img" value="{{ row[8] }}">
+                  <div class="input-field">
+                    <i class="fas fa-key"></i>
+                    <h3>{{ row[0] }}</h3>
+                  </div>
+                  <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input name="username" type="text" value="{{ row[1] }}" placeholder="Username" required>
+                  </div>
+                  <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input name="email" type="email" value="{{ row[2] }}" placeholder="Email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+                  </div>
+                  <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input name="password" type="password" placeholder="Nueva contraseña" required>
+                  </div>
+                    <div class="g-col-6">
+                      <div class="grid text-center" style="background-color: rgba(216, 237, 255, 0);">
+                        <div class="g-col-9">
+                            <div class="input-group mt-3 mb-2 g-start-2 input-school">
+                                <img src="{{url_for('static', filename='assets/admin-user-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
+                                <select class="form-select" id="inputGroupSelect02" name="auth" required>
+                                  <option selected>{{ row[4] }}</option>
+                                  <option value="U">Usuario</option>
+                                  <option value="A">Administrador</option>
+                                </select>
+                                <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="g-col-6">
+                      <div class="p-2">
+                        <img src="{{url_for('static', filename='assets/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                        {{ row[5] }}
+                        <label for="formFile" class="form-label"></label>
+                        <input name="img" class="form-control" type="file" id="formFile">
+                      </div>
+                    </div>      
+                  <input type="submit" class="btn-b" value="Continuar" required>
+                </form>
+                {% endfor %}
+              </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>
+</body>
+{% endblock %}
+
+{% block js %}<script src="{{url_for('static', filename='js/login.js')}}"></script> {% endblock %}
+

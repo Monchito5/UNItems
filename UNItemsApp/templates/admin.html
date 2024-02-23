@@ -1,0 +1,14 @@
+{% extends "layout-for-admin.html" %}
+{% block titulo %} Admin {% endblock %}
+<!-- Custom CSS -->
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin_styles.css')}}"/>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5 py-5 mb-5 fondo-admin">
+<img class="img-fondo" src="{{url_for('static', filename='css/pictures/number-six-icon.svg')}}" alt="">
+</div>
+</body>
+{% endblock %}

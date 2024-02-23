@@ -1,0 +1,76 @@
+{% extends "layout-for-login.html" %}
+{% block titulo %} Número 6 - Registro {% endblock %}
+
+
+{% block contenido %}
+
+<body>
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">Registra una cuenta</h2>
+          </div>
+        </div>
+          <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+              <div class="wrap">
+                  <div class="img bg-img"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                      <div class="d-flex">
+                        <div class="w-100">
+                          <h3 class="mb-4">Registro</h3>
+                        </div>
+                      </div>
+                        <form action="/loginRegister" method="post" class="signin-form">
+                          {% with messages = get_flashed_messages() %}
+  
+                          {% if messages %}
+                          <br/>
+                          {% for message in messages %}
+                          <div class="alert alert-primary alert-dismissible" role="alert">
+                              <strong>{{ message }}</strong>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          {% endfor %}
+                          {% endif %}
+                        
+                          {% endwith %}  
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                          <div class="form-group mt-3">
+                            <input name="username" type="text" class="form-control" required>
+                            <label class="form-control-placeholder" for="username">Apodo</label>
+                          </div>
+                          <div class="form-group mt-3">
+                            <input name="email" type="text" class="form-control" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+                            <label class="form-control-placeholder" for="username">Correo Electrónico</label>
+                          </div>
+                        <div class="form-group">
+                            <input name="password" id="password-field" type="password" class="form-control" required>
+                            <label class="form-control-placeholder" for="password">Contraseña</label>
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                         </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary rounded submit px-3">Continuar</button>
+                        </div>
+                  <div class="form-group d-md-flex">
+                    <div class="w-50 text-left">
+                    <label class="checkbox-wrap checkbox-primary mb-0">Acepta las politicas de privacidad
+                    <input type="checkbox" checked>
+                  <span class="checkmark"></span>
+                  </label>
+                  </div>
+                  </div>
+                </form>
+                <p class="text-center">¿Ya tienes una cuenta? <a data-toggle="tab" href="{{ ('/login') }}">Inicia Sesión</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+{% endblock %}
+
+{% block js %}<script src="{{url_for('static', filename='js/login.js')}}"></script> {% endblock %}
