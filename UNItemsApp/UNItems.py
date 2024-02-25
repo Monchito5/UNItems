@@ -270,7 +270,7 @@ def loginUser():
 @UNItemsApp.route('/perfilUser')
 @login_required
 def perfilUser():
-    return render_template('perfilUser.html')
+    return render_template('404.html')
 
 @UNItemsApp.route('/edit-user', methods = ['GET', 'POST'])
 @login_required
@@ -352,7 +352,7 @@ def passwordR(id,):
 
 @UNItemsApp.errorhandler(404)
 def errorhandler401(e):
-    return render_template('404.html')
+    return render_template('Error401.html')
 
 @UNItemsApp.route("/home")    
 @login_required
