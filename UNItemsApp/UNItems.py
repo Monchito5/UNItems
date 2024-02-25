@@ -234,7 +234,7 @@ def loginRegister():
         regUser.execute(query, (username, email, hash))
         db.connection.commit()
 
-        msg = Message(subject="Bienvenido a Number Six", recipients=[email], html=render_template ("mail-template.html"))
+        msg = Message(subject="Bienvenido a UNItems", recipients=[email], html=render_template ("mail-template.html"))
         mail.send(msg)
         return render_template('login.html')
     else:
@@ -270,7 +270,12 @@ def loginUser():
 @UNItemsApp.route('/perfilUser')
 @login_required
 def perfilUser():
-    return render_template('perfilUser.html')
+    if not current_user.is_authenticated: # Definir current_user
+        flash("Necesitas iniciar sesión para ver más")
+        return render_template('login.html')
+    else:
+        return render_template('perfilUser.html')
+            
 
 @UNItemsApp.route('/edit-user', methods = ['GET', 'POST'])
 @login_required
@@ -296,8 +301,7 @@ def update_user(id,):
                 os.remove(folder)
             img = request.files['img']
             filename = secure_filename(img.filename)
-            img.save(os.path.join(UNItemsApp
-        .config['folder'], filename))
+            img.save(os.path.join(UNItemsApp.config['folder'], filename))
             updateUser.execute("UPDATE user SET username = %s, email = %s, password = %s, auth = %s, imgprofile = %s WHERE id=%s", (username, email, hash, filename, id,))
             db.connection.commit()
     flash("Actualización de datos completada")
