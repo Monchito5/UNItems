@@ -270,6 +270,7 @@ def loginUser():
 @UNItemsApp.route('/perfilUser')
 @login_required
 def perfilUser():
+    return render_template('404.html')
     if not current_user.is_authenticated: # Definir current_user
         flash("Necesitas iniciar sesión para ver más")
         return render_template('login.html')
@@ -356,7 +357,7 @@ def passwordR(id,):
 
 @UNItemsApp.errorhandler(404)
 def errorhandler401(e):
-    return render_template('404.html')
+    return render_template('Error401.html')
 
 @UNItemsApp.route("/home")    
 @login_required
