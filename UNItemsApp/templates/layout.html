@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/bg-color.scss')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/custom.scss')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mainHome.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/variables.scss')}}">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/heroes/">
     <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
@@ -26,15 +27,15 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">              
-    <a href="/"><img src="{{url_for('static', filename='assets/number-six-icon.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>       
-    <a class="navbar-brand" href="#">UNItems</a><a href="/" tabindex="-1"><i class="fa-solid fa-house-user"></i></i> </a>
+    <a href="/"><img src="{{url_for('static', filename='assets/pencils_120694.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>       
+    <a class="navbar-brand" href="#">UNItems</a><a href="/" tabindex="-1"></i> </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menú
           </button>
           <ul class="dropdown-menu">
@@ -57,7 +58,7 @@
           </ul>
         </div>
         <li class="nav-item">
-          <a class="nav-link disabled">Porque los libros y apuntes merecen más de una historia.</a>
+          <a class="nav-link ">Porque tus materiales y apuntes merecen más de una historia.</a>
         </li>
         {% if current_user.username=="MrSylar" %}
         <li class="nav-item">
