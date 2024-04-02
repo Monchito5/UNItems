@@ -1,9 +1,8 @@
 {% extends "layout-for-admin.html" %}
-{% block titulo %} Number 006 {% endblock %}
+{% block titulo %} UNItems {% endblock %}
 
 <!-- Custom CSS -->
 {% block css %}
-
 <!-- DataTable -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
 <!-- Font Awesome -->
@@ -25,7 +24,7 @@
   {% endfor %}
   {% endif %}
 
-  {% endwith %}   
+  {% endwith %}
   <div class="container my-2">
       <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -75,11 +74,11 @@
 {% endblock %}
 
 <!-- Custom JS -->
-{% block js %} 
+{% block js %}
 <script>
     const myModal = document.getElementById('myModal')
     const myInput = document.getElementById('myInput')
-    
+
     myModal.addEventListener('shown.bs.modal', () => {
       myInput.focus()
     })
@@ -89,7 +88,7 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-23581568-13');
-  </script>
+</script>
 <script src="{{url_for('static', filename='js/main.js')}}"></script>
 <script src="{{url_for('static', filename='js/admin_table.js')}}"></script>
 {% endblock %}

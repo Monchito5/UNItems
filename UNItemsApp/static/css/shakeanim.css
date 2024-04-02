@@ -1,0 +1,13 @@
+input:valid {
+    border-color: rgb(227, 251, 232);
+}
+
+input:invalid { 
+    animation: shake .3s;
+}
+
+@keyframes shake {
+    25% { transform: translate(8px) }
+    50% { transform: translate(-8px) }
+    75% { transform: translate(8px) }
+}
