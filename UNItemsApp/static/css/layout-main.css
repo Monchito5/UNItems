@@ -1,0 +1,75 @@
+body {
+    background: linear-gradient(126deg, #eaf7ff, #ffffff, #eae6faf0, #edfcfce7, #ffffff);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: gradient 53s ease infinite;
+    -moz-animation: gradient 53s ease infinite;
+    animation: gradient 53s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+    0%{background-position:0% 22%}
+    50%{background-position:100% 79%}
+    100%{background-position:0% 22%}
+}
+@-moz-keyframes gradient {
+    0%{background-position:0% 22%}
+    50%{background-position:100% 79%}
+    100%{background-position:0% 22%}
+}
+@keyframes gradient {
+    0%{background-position:0% 22%}
+    50%{background-position:100% 79%}
+    100%{background-position:0% 22%}
+}
+.offcanvas{
+    background: linear-gradient(45deg, #e4c1f8 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, linear-gradient(135deg, #f9daf5 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, linear-gradient(225deg, #90e0ee 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) linear-gradient(315deg, #a9ded9 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;
+}
+
+.navbar-ly {
+    background: linear-gradient(45deg, #e4c1f8 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, linear-gradient(135deg, #f6e1f9 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, linear-gradient(225deg, #90e0ee 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) linear-gradient(315deg, #a9ded9 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;
+}
+.main-c {
+    background-color: #313131;
+    background-image: url('pictures/Boolean-gif.gif');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}  
+
+
+.footer-c {
+margin-top: 20px;
+padding-bottom: 1%;
+background: #757F9A;  
+background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A); 
+background: linear-gradient(to right, #D7DDE8, #757F9A); 
+}
+
+.redes-footer {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    height: auto;
+}
+
+.btn {
+transition: 0.20s;
+background-size: 200% auto;
+color: rgb(37, 37, 37);
+box-shadow: 3px 2px 10px rgb(255, 255, 255);
+}
+.btn:hover {
+background-position: right center;
+color: rgb(37, 37, 37);
+border: none;
+}
+.btn-primary {
+border: none;
+background-image: linear-gradient(to right, #729fffd5 0%, #bee9ff 51%, #bce2fd 100%);
+}
+.btn-secondary {
+border: none;
+color: #ffffff;
+}

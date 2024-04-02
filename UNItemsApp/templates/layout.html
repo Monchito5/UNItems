@@ -10,146 +10,107 @@
     <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/bg-color.scss')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/custom.scss')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/variables.scss')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/heroes/">
-    <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
-    <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>{% block titulo %} {% endblock %}</title>
-    {% block css %} {% endblock %}
+    {% block css %}{% endblock %}
 </head>
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
 
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">              
-    <a href="/"><img src="{{url_for('static', filename='assets/number-six-icon.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>       
-    <a class="navbar-brand" href="#">UNItems</a><a href="/" tabindex="-1"><i class="fa-solid fa-house-user"></i></i> </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menú
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item">
-              {% if current_user.is_anonymous %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-body shadow-lg" data-bs-theme="dark" aria-label="Navbar-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+          <i class="fa fa-swatchbook"></i> UNItems
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item">
+                  {% if current_user.is_anonymous %}
                 <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
-              {% else %}
-              <p></p>
-              {% endif %}
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              <a class="dropdown-item" aria-current="page" href="{{ ('/register') }}">Regístrate <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
-              </a>
-            </li>    
-          </ul>
-        </div>
-        <li class="nav-item">
-          <a class="nav-link disabled">Porque los libros y apuntes merecen más de una historia.</a>
-        </li>
-        {% if current_user.username=="MrSylar" %}
+                  {% else %}
+                <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
+                {% endif %}
+                </a>
+              </li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% if current_user.username=="sorum" %}
         <li class="nav-item">
           <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
         </li>
         {% else %}
         <p></p>
         {% endif %}
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar materiales" aria-label="Search">
-        <button class="btn btn-outline" type="submit">Buscar</button>
-      </form>
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        </form>
+      </div>
     </div>
-  </div>
   </nav>
 
-  {% block contenido %} {% endblock %}  
+  {% block contenido %} {% endblock %}
 
 <!-- ======================= -->
 <!-- FOOTER -->
 <!-- ======================= -->
-<div class="footer-lyt">
-<footer class="footer"  style="background-color: #f1f1f1;">
-  <!-- Grid container -->
-  <div class="container pt-4">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Facebook -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-facebook-f"></i
-      ></a>
-  
-      <!-- Twitter -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-twitter"></i
-      ></a>
-  
-      <!-- Google -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-google"></i
-      ></a>
-  
-      <!-- Instagram -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-instagram"></i
-      ></a>
-  
-      <!-- Linkedin -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-linkedin"></i
-      ></a>
-      <!-- Github -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-dark m-1"
-        href="#!"
-        role="button"
-        data-mdb-ripple-color="dark"
-        ><i class="fab fa-github"></i
-      ></a>
-    </section>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
-  
-  <!-- Copyright -->
-  <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2020 Copyright:
-    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-  </footer>
-</div>
+        <footer>
+            <div class="container__footer">
+                <div class="box__footer">
+                    <div class="logo">
+                      <img src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo">
+                    </div>
+                </div>
+                <div class="box__footer">
+                    <h2>Soluciones</h2>
+                    <a href="https://www.google.com">App Desarrollo</a>
+                    <a href="#">App Marketing</a>
+                    <a href="#">IOS Desarrollo</a>
+                    <a href="#">Android Desarrollo</a>
+                </div>
+
+                <div class="box__footer">
+                    <h2>Compañia</h2>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Trabajos</a>
+                    <a href="#">Procesos</a>
+                    <a href="#">Servicios</a>
+                </div>
+
+                <div class="box__footer">
+                    <h2>Redes Sociales</h2>
+                    <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
+                    <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+                </div>
+            </div>
+
+            <div class="box__copyright">
+                <hr><p>Materiales Educativos - <b>UNItems</b></p>
+            </div>
+        </footer>
 {% block js %}{% endblock %}
 </html>

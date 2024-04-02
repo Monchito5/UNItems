@@ -1,5 +1,5 @@
 {% extends "layout-for-login.html" %}
-{% block titulo %} Número 6 - Registro {% endblock %}
+{% block titulo %} UNItems - Registro {% endblock %}
 
 
 {% block contenido %}
@@ -24,7 +24,7 @@
                       </div>
                         <form action="/loginRegister" method="post" class="signin-form">
                           {% with messages = get_flashed_messages() %}
-  
+
                           {% if messages %}
                           <br/>
                           {% for message in messages %}
@@ -34,8 +34,8 @@
                           </div>
                           {% endfor %}
                           {% endif %}
-                        
-                          {% endwith %}  
+
+                          {% endwith %}
                           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                           <div class="form-group mt-3">
                             <input name="username" type="text" class="form-control" required>

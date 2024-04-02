@@ -1,6 +1,8 @@
+
 class config:
     SECRET_KEY = 'unitems5'
 
+    
 class DevelompentConfig(config):
     DEBUG = True
     MYSQL_HOST      = 'localhost'

@@ -19,67 +19,63 @@
   <title>{% block titulo %} {% endblock %}</title>
 </head>
   {% block css %}{% endblock %}
-  
+
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
 
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">              
-    <a href="/"><img src="{{url_for('static', filename='assets/number-six-icon.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>       
-    <a class="navbar-brand" href="#">Numero 006</a><a href="/" tabindex="-1"><i class="fa-solid fa-house-user"></i></i> </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menú
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item">
-              {% if current_user.is_anonymous %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-body shadow-lg" data-bs-theme="dark" aria-label="Navbar-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+          <img src="{{url_for('static', filename='/home/guillermo32/mysite/assets/images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">UNItems
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item">
+                  {% if current_user.is_anonymous %}
                 <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
-              {% else %}
-              <p></p>
-              {% endif %}
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              {% if current_user.is_anonymous %}
-              <p></p>
-              {% else %}
-              <a class="dropdown-item" aria-current="page" href="{{ ('/logout') }}">Cerrar Sesión</a>
-              {% endif %}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <li class="nav-item">
-          <a class="nav-link disabled">Salud mental, la prioridad de tu felicidad</a>
-        </li>
-        {% if current_user.username=="MrSylar" %}
+                  {% else %}
+                <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
+                {% endif %}
+                </a>
+              </li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% if current_user.username=="sorum" %}
         <li class="nav-item">
           <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
         </li>
         {% else %}
         <p></p>
         {% endif %}
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+        </form>
+      </div>
     </div>
-  </div>
   </nav>
 
-{% block contenido %} {% endblock %}  
+{% block contenido %} {% endblock %}
 
 
 <!-- ======================= -->
@@ -99,7 +95,7 @@
           data-mdb-ripple-color="dark"
           ><i class="fab fa-facebook-f"></i
         ></a>
-    
+
         <!-- Twitter -->
         <a
           class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -108,7 +104,7 @@
           data-mdb-ripple-color="dark"
           ><i class="fab fa-twitter"></i
         ></a>
-    
+
         <!-- Google -->
         <a
           class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -117,7 +113,7 @@
           data-mdb-ripple-color="dark"
           ><i class="fab fa-google"></i
         ></a>
-    
+
         <!-- Instagram -->
         <a
           class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -126,7 +122,7 @@
           data-mdb-ripple-color="dark"
           ><i class="fab fa-instagram"></i
         ></a>
-    
+
         <!-- Linkedin -->
         <a
           class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -147,7 +143,7 @@
       <!-- Section: Social media -->
     </div>
     <!-- Grid container -->
-    
+
     <!-- Copyright -->
     <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       © 2020 Copyright:
