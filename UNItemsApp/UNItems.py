@@ -276,6 +276,11 @@ def perfilUser():
 @login_required
 def edit_user():
     return render_template('edit-user.html')
+
+@UNItemsApp.route('/Us', methods = ['GET', 'POST'])
+def colaboradores():
+    return render_template('colaboradores.html')
+
 # ========================
 # Ruta del botón ------>
 # ========================
