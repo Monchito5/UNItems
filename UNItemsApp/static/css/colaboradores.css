@@ -1,0 +1,12 @@
+.orderboxColaboradores{
+    margin-top: 1in;
+}
+
+.container__box-cardPrimaryCollab{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: -1.5in;
+    margin-right: -1.5in;
+}

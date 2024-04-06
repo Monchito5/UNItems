@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='scss/bg-color.scss')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/colaboradores.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='scss/custom.scss')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mainHome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='scss/variables.scss')}}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/heroes/">
+    <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/bootstrap.scss')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/_root.scss')}}">
@@ -100,6 +110,44 @@
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-body shadow-lg" data-bs-theme="dark" aria-label="Navbar-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+          <i class="fa fa-swatchbook"></i> UNItems
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Us">Colaboradores</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item">
+                  {% if current_user.is_anonymous %}
+                <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
+              {% else %}
+              <p></p>
+              {% endif %}
+              </a>
+            </li>
+            <li><a class="dropdown-item">
+              <a class="dropdown-item" aria-current="page" href="{{ ('/register') }}">Regístrate <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
+              </a>
+            </li>
+            <li><a class="dropdown-item">
+              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
@@ -133,6 +181,9 @@
               </a>
             </li>
           </ul>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link ">Porque tus materiales y apuntes merecen más de una historia.</a>
         </li>
       </ul>
       {% if current_user.username=="sorum" %}
