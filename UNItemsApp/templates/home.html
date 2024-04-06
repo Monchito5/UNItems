@@ -1,23 +1,33 @@
 {% extends "layout.html" %}
 {% block titulo %} UNItems {% endblock %}
-{% block contenido %}
 
 {% block css %}{% endblock %}
+
+{% block contenido %}
     <!-- Inicio -->
-    <main>
+<main>
+    
     <!-- Portada -->
-        <div class="container__cover div__offset">
-            <div class="cover">
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
                 <section class="text__cover">
-                    <h1>Lorem ipsum dolor sit amet.</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus ratione at nihil aliquam possimus quibusdam eum. Dolor hic provident quos officiis consectetur eveniet? Ratione, eius iure ullam officia nostrum a.</p>
-                    <a href="#" class="btn__text-cover btn__text">Empieza Ya</a>
+                    <h1>UNItems</h1>
+                    <p>Únete a nuestra comunidad y disfruta de los beneficios.</p>
                 </section>
-                <section class="image__cover">
-                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" alt="">
-                </section>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                    <a href="{{ ('/loginUser') }}"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
+                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Noticias</button></a>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg clearfix">
+                <figure class="figure my-2 p-3">
+                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" class="figure-img img-fluid rounded-lg-3" alt="...">
+                    <figcaption class="figure-caption text-end">Lorem ipsum.</figcaption>
+                </figure>
             </div>
         </div>
+    </div>
 
         <!-- Generador de confianza -->
         <div class="container__trust container__card-primary">
@@ -61,7 +71,6 @@
                     <img src="{{url_for('static', filename='images/About/about-2.png')}}" alt="">
                 </div>
             </div>
-
         </div>
 
         <!--SERVICIOS-->
@@ -125,5 +134,5 @@
                 </div>
             </div>
         </div>
-    </main>
+</main>
 {% endblock %}
