@@ -10,3 +10,9 @@
     margin-left: -1.5in;
     margin-right: -1.5in;
 }
+
+.teamImg{
+    width: 4.8in;
+    height: 3in;
+    border: 5px red dotted;
+}
