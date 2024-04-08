@@ -1,74 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="{{url_for('static', filename='assets/book-open.svg')}}" type="image/x-icon">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>{% block titulo %} {% endblock %}</title>
     {% block css %} {% endblock %}
 </head>
 
+<body>
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <i class="fa fa-swatchbook"></i> UNItems
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          {% if current_user.is_anonymous %}
-          <a class="nav-link active" aria-current="page" href="{{ ('/loginUser') }}">Inicia Sesión</a>
-          {% else %}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ ('/perfilUser') }}">Perfil -<span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
-          {% endif %}
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acerca de
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" aria-current="page" href="#"  tabindex="-1">Blog</a>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-              <a class="dropdown-item" aria-current="page" href="#">Ayuda</a>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      {% if current_user.username=="sorum" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
-        </li>
-        {% else %}
-        <p></p>
-      {% endif %}
-    </div>
-  </div>
-</nav>
-
-<body>
+  <!-- ================================ -->
+  <!-- CUERPO DE LA PÁGINA -->
+  <!-- ================================ -->
+  <main>
   {% block contenido %} {% endblock %}
+  </main>
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"77350eda8b34ea1e","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
   <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
   <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{url_for('static', filename='js/password-eye.js')}}"></script>
   <script src="{{url_for('static', filename='js/popper.js')}}"></script>
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-</body>
-
-
   {% block js %}{% endblock %}
+</body>
 </html>
