@@ -31,6 +31,7 @@ login_manager_app = LoginManager(UNItemsApp)
 folder = os.path.join(os.path.dirname(__file__), 'uploads/profile')
 UNItemsApp.config['folder'] = folder
 
+
     # ==============================
     # Rutas principales
     # ==============================
