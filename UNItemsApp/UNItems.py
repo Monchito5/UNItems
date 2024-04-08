@@ -53,7 +53,7 @@ def uploads(imgprofile):
 
 @UNItemsApp.route('/')
 def index():        
-    return render_template('home.html')
+    return render_template('landing-home.html')
     
     
     # ==============================

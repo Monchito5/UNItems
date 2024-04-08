@@ -11,61 +11,57 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/admin_styles.css')}}">
     <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
-    <title>{% block titulo %} {% endblock %}</title>
+<link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
+<title>{% block titulo %} {% endblock %}</title>
     {% block css %} {% endblock %}
 
 
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
+<nav class="navbar bg-light fixed-top navbar-ly">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="{{url_for('static', filename='/home/guillermo32/mysite/assets/images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">UNItems
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <a href="{{ ('/') }}"><img src="{{url_for('static', filename='assets/book-open.svg')}}" alt="" width="70" height="44" class="d-inline-block align-text-top"></a>
+    <a class="navbar-brand" href="{{ ('/admin') }}">Operaciones de administrador</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Ayuda</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Únete
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item">
-                {% if current_user.is_anonymous %}
-              <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
-                {% else %}
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
-              {% endif %}
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      {% if current_user.username=="sorum" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
-        </li>
-        {% else %}
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ ('/admin') }}">Inicio<img src="{{url_for('static', filename='assets/admin-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Herramientas
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ ('/admin-view') }}">Usuarios<img src="{{url_for('static', filename='assets/user-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li>
+              <li><a class="dropdown-item" href="{{ ('/admin-operations') }}">Operaciones<img src="{{url_for('static', filename='assets/administrator-tools-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ ('/admin-articles-view') }}">Artículos<img src="{{url_for('static', filename='assets/articles-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+              <li><a class="dropdown-item" href="{{ ('/admin-articles-operations') }}">Operaciones<img src="{{url_for('static', filename='assets/job-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ ('/admin-comments-view') }}">Comentarios<img src="{{url_for('static', filename='assets/comments-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+              <li><a class="dropdown-item" href="{{ ('/admin-comments-operations') }}">Operaciones<img src="{{url_for('static', filename='assets/db-config-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+            </ul>
+          </li>
+        </ul>
+        <hr>
+        {% if current_user.is_anonymous %}
         <p></p>
-      {% endif %}
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+        {% else %}
+        <a class="btn btn-secondary my-2" aria-current="page" href="{{ ('/logout') }}">Cerrar Sesión</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 </nav>
