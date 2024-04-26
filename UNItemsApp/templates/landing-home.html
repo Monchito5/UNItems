@@ -17,8 +17,8 @@
                     <p></p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                     {% if current_user.is_anonymous %}
-                    <a href="{{ ('/loginUser') }}"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
-                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Noticias</button></a>
+                    <a href="{{ ('/loginUser') }}"><button type="button" class="btn btn-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
+                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary px-4">Noticias</button></a>
                     {% else %}
                     <a href="#"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
                     {% endif %}
@@ -32,6 +32,82 @@
         </div>
     </div>
     <br>
+
+    <div class="container py-3 mt-3 d-flex justify-content-center">
+        <div class="highlight">
+            <div class="mx-auto p-2">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Abrir comentarios
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="container py-1 mt-2">
+                    <div class="row d-flex rounded-2">
+                    {% for comment in comments %}
+                    <div class="container py-1 mt-2 border border-secondary-subtle rounded-3 shadow-lg">
+                      <div class="col me-auto p-2 d-flex justify-content-between">
+                        <strong class="justify-content-md-start">
+                            {% if comment.commenter %}
+                            <span class="badge text-bg-dark fs-6 border">
+                                {{ comment.commenter.username }}
+                            </span>
+                            {% else %}
+                            <span class="badge text-bg-dark fs-6 border">
+                                anónimo
+                            </span>
+                            {% endif %}
+                        </strong>
+                        <small class="ms-2 mb-2">
+                            Publicado
+                            {% if comment.posted %}
+                                {{ comment.posted.strftime("%A, %d %B %Y at %H:%M") }}
+                            {% else %}
+                                at an unknown time
+                            {% endif %}
+                        </small>
+                      </div>
+                      <div class="col p-2 flex-grow-1">
+                          {{ comment.content }}
+                      </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                {% if current_user.is_authenticated %}
+                    <div class="row mb-3 container themed-container">
+                        <form action="." method="POST">
+                            <div class="input-group mb-3">
+                                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                  <input name="contents" type="text" class="form-control rounded" placeholder="Deja un comentario aquí" aria-label="Deja un comentario" aria-describedby="button-addon2">
+                                  <button class="btn btn-outline-success rounded-5 ms-1" type="submit" id="button-addon2" value="Enviar">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="form-floating mb-3">
+                      <textarea class="form-control" placeholder="Deja un comentario" id="floatingTextareaDisabled" disabled></textarea>
+                      <label for="floatingTextareaDisabled">Comentarios</label>
+                    </div>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Generador de confianza -->
     <div class="container text-center">
@@ -83,10 +159,10 @@
         </div>
         <div class="overflow-hidden clearfix img__heroe">
             <figure class="figure my-2 px-3">
-                <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}" class="figure-img img-fluid rounded-lg-3 shadow-lg mb-4" alt="..." width="700" height="500" loading="lazy">
+                <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}" class="figure-img img-fluid shadow-lg mb-4" alt="..." width="700" height="500" loading="lazy">
             </figure>
         </div>
-    </div>    
+    </div>
     <!--SERVICIOS-->
     <div class="container text-center">
         <hr>
@@ -158,4 +234,21 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+      myInput.focus()
+    })
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
 {% endblock %}

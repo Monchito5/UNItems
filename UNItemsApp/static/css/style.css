@@ -40,17 +40,17 @@ body {
     50%{background-position:100% 79%}
     100%{background-position:0% 22%}
 }
-.offcanvas{
+/* .offcanvas{
     background-image: radial-gradient( circle 911px at 0.4% 50.5%, #FEB692  18.7%, #EA5455 90% );
-}
+} */
 
-.navbar-ly {
+/* .navbar-ly {
     background-image: radial-gradient( circle 911px at 0.4% 50.5%, #EA5455  18.7%, #FEB692 90% );
-}
+} */
 
 .btn__text{
     display: block;
-    width: 150px;
+    width: fit-content;
     margin-top: 40px;
     padding: 10px 20px;
     text-align: center;

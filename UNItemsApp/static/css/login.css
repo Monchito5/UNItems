@@ -119,7 +119,6 @@ form.sign-in-form {
   justify-content: center;
 }
 
-
 .btn-b {
   width: 150px;
   background-color: #fd8259;
@@ -215,7 +214,7 @@ form.sign-in-form {
   margin: 10px 0;
   outline: none;
   background-size: 200% auto;
-  color: rgba(38, 41, 53, 0.911);
+  color: rgba(255, 255, 255, 0.911);
   cursor: pointer;
   border: none;
   background-image: linear-gradient(to right, #ff8c72d5 0%, #ffcfbe 51%, #fdc8bc 100%);
@@ -223,7 +222,7 @@ form.sign-in-form {
   
 .btn.transparent:hover {
   background-position: right center;
-  color: rgba(180, 54, 12, 0.952);
+  color: rgba(222, 63, 10, 0.911);
   border: none;
 }
 

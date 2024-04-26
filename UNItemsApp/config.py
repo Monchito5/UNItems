@@ -1,4 +1,3 @@
-
 class config:
     SECRET_KEY = 'unitems5'
 
