@@ -51,18 +51,35 @@ def after_request(response):
 def uploads(imgprofile):
     return send_from_directory(UNItemsApp.config['folder'], imgprofile)
 
-@UNItemsApp.route('/')
+@UNItemsApp.route('/', methods = ['GET', 'POST'])
 def index():        
-    return render_template('home.html')
+    if request.method == 'POST':
+        date = request.form['date']
+        content = request.form['content']
+
+        addComments = db.connection.cursor()
+        query = "INSERT INTO comments (date, content) VALUES (%s, %s)"
+        addComments.execute(query, (date, content))
+        db.connection.commit()
+    flash("Comentario agregado")
+    return render_template('landing-home.html')
     
     
-    # ==============================
-    # Rutas administrador y modales
-    # ==============================
+# ==============================
+# Rutas administrador y modales
+# ==============================
 @UNItemsApp.route('/admin')
 @login_required
 def admin():
     return render_template('admin.html')
+
+@UNItemsApp.route('/admin-view', methods = ['GET', 'POST'])
+@login_required
+def admin_view():
+    cursor = db.connection.cursor()
+    cursor.execute("SELECT * FROM user")
+    data = cursor.fetchall()
+    return render_template('admin-view.html', user = data)
 
 @UNItemsApp.route('/admin-operations', methods = ['GET', 'POST'])
 @login_required
@@ -98,7 +115,7 @@ def admin_register():
         regUser.execute("INSERT INTO user (username, email, password, auth, imgprofile) VALUES (%s, %s, %s, %s, %s)", (username, email, hash, auth, newNameFoto))
         db.connection.commit()
         
-        msg = Message(subject="Bienvenido a Number Six", recipients=[email], html=render_template ("mail-template.html"))
+        msg = Message(subject="Bienvenido a UNItems", recipients=[email], html=render_template ("mail-template.html"))
         mail.send(msg)
         
         flash('Usuario agregado exitosamente')
@@ -228,7 +245,7 @@ def loginRegister():
         email = request.form['email']
         password = request.form['password']
         hash = generate_password_hash(password) 
-
+        
         regUser = db.connection.cursor()
         query = "INSERT INTO user (username, email, password) VALUES (%s, %s, %s)"
         regUser.execute(query, (username, email, hash))
@@ -295,11 +312,15 @@ def update_user(id,):
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
-        password = request.form['password']
-        auth = request.form['auth']
-        hash = generate_password_hash(password)
+        fullname = request.form['fullname']
+        age = request.form['age']
+        schoolgrade = request.form['schoolgrade']
         img = request.files['img']    
         updateUser = db.connection.cursor()
+        query = "UPDATE user SET username = %s, email = %s, fullname = %s, age = %s, schoolgrade = %s, imgprofile = %s WHERE id = {0}".format(id);
+        datos = (username, email, fullname, age, schoolgrade, id)
+        updateUser.execute(query, datos)
+        db.connection.commit()
 
         if request.files.get('img'):
             folder = '/UNItemsApp/uploads/profile{}'.format(img)

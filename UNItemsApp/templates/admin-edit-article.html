@@ -1,0 +1,65 @@
+{% extends "layout-for-user.html" %}
+{% block titulo %} Artículos {{ current_user.username }} {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/profile-styles.css')}}">
+{% endblock %}
+
+{% block contenido %}
+<body>
+  <section class="p-5 perfil-usuario">
+    <div class="container-xl mt-5 mb-2 p-3 bg-light rounded-4 shadow-lg">
+      <div class="container p-2 bg-light rounded-5 shadow" style="--bs-bg-opacity: .3;">
+        <div class="container text-center">
+          <div class="portada-perfil bg-colorgradient">
+        <style>
+        .mensaje a {
+            color: inherit;
+            margin-right: .5rem;
+            display: inline-block;
+        }
+        .mensaje a:hover {
+            color: #309B76;
+            transform: scale(1.4)
+        }
+        </style>
+        <div class="container-sm rounded-4 form-user shadow-sm">
+          <form action="/admin-update-article" class="row g-3" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="col-md-6">
+              <label class="form-label"><h2>Título del artículo</h2></label>
+              <input name="title" type="text" class="form-control" required>
+            </div>
+            <div class="col-12 mb-4">
+              <label class="form-label">Fecha de publicación</label>
+              <input name="pdate" type="date" class="form-control"  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required>
+            </div>
+            <div class="col-12 mb-4">
+              <div class="input-group mt-3 mb-2 g-start-2">
+                <select class="form-select" id="inputGroupSelect02" name="learningchannel" required>
+                  <option selected>Elige el canal de aprendizaje</option>
+                  <option value="Auditivo">Auditivo</option>
+                  <option value="Visual">Visual</option>
+                  <option value="Kinéstesico">Kinéstesico</option>
+                </select>
+                <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+            </div>
+            <div class="form-floating">
+              <textarea name="content" class="form-control" placeholder="Agrega el contenido del artículo" id="floatingTextarea2" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">Contenido</label>
+            </div>
+            <br><br>
+            <div class="col-12 mb-4">
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+{% endblock %}
+
+{% block js %}{% endblock %}

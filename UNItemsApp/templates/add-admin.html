@@ -1,0 +1,132 @@
+{% extends "layout-for-login.html" %}
+{% block titulo %} Admin - Agregar Usuario {% endblock %}
+
+{% block css %}
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+{% endblock %}
+
+{% block contenido %}
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <div class="mt-5 py-5">
+        <form action="/add" class="sign-up-form" method="post" enctype="multipart/form-data">
+          {% with messages = get_flashed_messages() %}
+
+          {% if messages %}
+          <br/>
+          {% for message in messages %}
+          <div class="alert alert-primary alert-dismissible" role="alert">
+              <strong>{{ message }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+        
+          {% endwith %} 
+          <h2 class="title">Regístrate</h2>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input name="fullname" type="text" placeholder="Nombre Completo" required>
+            </div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input name="username" type="text" placeholder="Username" required>
+          </div>
+          <div class="input-field mb-3 py-2">
+              <img src="{{url_for('static', filename='assets/number-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
+              <input type="number" class="form-control" placeholder="Ingresa tu edad" id="tentacles" name="age" min="0" max="100" required>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input name="email" type="email" placeholder="Email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input name="password" type="password" placeholder="Contraseña" required>
+          </div>
+
+          <div class="grid text-center">
+            <div class="g-col-6">
+              <div class="grid text-center" style="background-color: rgba(216, 237, 255, 0);">
+                <div class="g-col-9">
+                    <div class="input-group mt-3 mb-2 g-start-2 input-school">
+                        <img src="{{url_for('static', filename='assets/school-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
+                        <select class="form-select" id="inputGroupSelect02" name="schoolgrade" required>
+                          <option selected>Elige tu nivel de estudios...</option>
+                          <option value="Ninguno">Ninguno</option>
+                          <option value="Primaria">Primaria</option>
+                          <option value="Secundaria">Secundaria</option>
+                          <option value="Preparatoria">Preparatoria</option>
+                          <option value="Licenciatura">Licenciatura</option>
+                          <option value="Ingenieria">Ingeniería</option>
+                          <option value="Doctorado">Doctorado</option>
+                        </select>
+                        <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="g-col-6">
+              <div class="grid text-center" style="background-color: rgba(216, 237, 255, 0);">
+                <div class="g-col-9">
+                    <div class="input-group mt-3 mb-2 g-start-2 input-school">
+                        <img src="{{url_for('static', filename='assets/admin-user-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
+                        <select class="form-select" id="inputGroupSelect02" name="auth" required>
+                          <option selected>Elige tu perfil...</option>
+                          <option value="U">Usuario</option>
+                          <option value="A">Administrador</option>
+                        </select>
+                        <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="g-col-6">
+              <div class="p-2">
+                <img src="{{url_for('static', filename='assets/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                <label for="formFile" class="form-label">Selecciona una foto de perfil</label>
+                <input name="img" class="form-control" type="file" id="formFile">
+              </div>
+            </div>
+          </div>        
+          <input type="submit" class="btn-b" value="Continuar" required>
+        </form>
+      </div>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>Agrega un nuevo usuario</h3>
+          <p>
+          Llena los campos para completar el registro
+          </p>
+          <button class="btn transparent" id="sign-up-btn">
+            Continuar
+          </button>
+        </div>
+        <img src="{{url_for('static', filename='assets/learning-icon.svg')}}" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>Operaciones como administrador</h3>
+          <p>
+            Agregar a un nuevo usuario
+          </p>
+        </div>
+        <img src="{{url_for('static', filename='assets/learn-icon.svg')}}" class="image" alt="" />
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
+
+{% block js %}<script src="{{url_for('static', filename='js/login.js')}}"></script> {% endblock %}
+
