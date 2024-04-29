@@ -305,10 +305,11 @@ def update_user(id,):
         fullname = request.form['fullname']
         age = request.form['age']
         schoolgrade = request.form['schoolgrade']
-        img = request.files['img']    
+        img = request.files['img']      
+        user_resume = request.form['user_resume']
         updateUser = db.connection.cursor()
-        query = "UPDATE user SET username = %s, email = %s, fullname = %s, age = %s, schoolgrade = %s, imgprofile = %s WHERE id = {0}".format(id);
-        datos = (username, email, fullname, age, schoolgrade, id)
+        query = "UPDATE user SET username = %s, email = %s, fullname = %s, age = %s, schoolgrade = %s, imgprofile = %s, user_resume = %s WHERE id = {0}".format(id);
+        datos = (username, email, fullname, age, schoolgrade, user_resume, id)
         updateUser.execute(query, datos)
         db.connection.commit()
 
@@ -331,24 +332,22 @@ def update_user(id,):
 @UNItemsApp.route('/comments', methods = ['GET', 'POST'])
 @login_required
 def comments():
+    """
+    A route decorator that handles the '/comments' endpoint. This function is used to display the 'comments.html' template.
+    
+    This route supports both GET and POST requests. The function is decorated with the '@login_required' decorator, which means that the user must be logged in to access this route.
+    
+    Returns:
+        A rendered template of 'comments.html'.
+    """
     return render_template('comments.html')
 
 # ========================
 # Ruta del botón ------>
 # ========================
-@UNItemsApp.route('/add-comments', methods = ['GET', 'POST'])
-@login_required
-def add_comments():
-    if request.method == 'POST':
-        date = request.form['date']
-        contents = request.form['contents']
-
-        addComments = db.connection.cursor()
-        query = "INSERT INTO comments (date, contents) VALUES (%s, %s)"
-        addComments.execute(query, (date, contents))
-        db.connection.commit()
-    flash("Comentario agregado")
-    return redirect(url_for('perfilUser'))
+@UNItemsApp.route('/comming-soon')
+def comming_soon():
+    return render_template('comming-soon.html')
 
 @UNItemsApp.route('/logout')
 @login_required

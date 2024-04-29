@@ -14,30 +14,153 @@
                     <p class="lead">¡Bienvenido! <span class="fw-bolder">{{ current_user.username }}</span></p>
                     <p class="lead">Comparte y Disfruta de la experiencia que ofrece UNItems.</p>
                     {% endif %}
-                    <p></p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                     {% if current_user.is_anonymous %}
-                    <a href="{{ ('/loginUser') }}"><button type="button" class="btn btn-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
+                    <a href="{{ ('/login') }}"><button type="button" class="btn btn-bd-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
                     <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary px-4">Noticias</button></a>
                     {% else %}
-                    <a href="#"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
+                    <a href="{{ ('/comming-soon') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
                     {% endif %}
                 </div>
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden clearfix">
-                <figure class="figure my-2 p-3">
-                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" class="figure-img img-fluid rounded-lg-3" alt="...">
+                <figure class="figure my-2 p-3 img__heroe">
+                    <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}" class="figure-img img-fluid rounded-lg-3" alt="...">
                 </figure>
             </div>
         </div>
     </div>
     <br>
 
+    <!-- Generador de confianza -->
+    <div class="container text-center">
+        <div class="container p-2 align-items-center">
+            <h1>Encuentra todo tipo de materiales educativos</h1>
+            <br>
+            <hr>
+        </div>
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card box__card-primary">
+                    <div class="card-body p-2">
+                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Gestión</h2>
+                        <p class="card-text">Conectamos a los usuarios para facilitar intercambios, 
+                        préstamos y compraventa de materiales educativos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+          <div class="col">
+            <div class="card box__card-primary">
+                <div class="card-body p-2">
+                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
+                    <h2>Análisis</h2>
+                    <p class="card-text">Utilizamos datos para optimizar funciones y servicios, 
+                    asegurando una plataforma más eficiente.
+                    </p>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card box__card-primary">
+                <div class="card-body p-2">
+                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
+                    <h2>Calidad</h2>
+                    <p class="card-text">Velamos por la seguridad y la fiabilidad de las transacciones. 
+                    Además ofrecemos un entorno confiable y transparente.</p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- HEROES -->
+    <div class="container">
+        <div class="row align-items-center px-4 pt-5 my-5 text-center">
+            <div class="col-md-7">
+                <h1 class="display-4 fw-bold text-body-emphasis">Comunidad</h1>
+                <p class="lead mb-4">En nuestra plataforma, proporcionamos a los alumnos una solución integral 
+                    para sus necesidades educativas, creando un espacio donde la comunidad estudiantil puede colaborar 
+                    y beneficiarse mutuamente. Nuestro enfoque se centra en la comodidad, la seguridad y la calidad, 
+                    brindando a nuestros usuarios una experiencia confiable y satisfactoria en cada transacción.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                    <a href="{{ ('/login') }}">
+                        <button type="button" class="btn btn-bd-primary btn-lg px-4 me-sm-3">Inicia Sesión</button>
+                    </a>
+                    <a href="{{ ('/comming-soon') }}">
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Blog</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="overflow-hidden clearfix mb-3">
+                    <figure class="figure my-2 px-3 img__heroe">
+                        <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}"  class="figure-img img-fluid" alt="..." width="500" height="300" loading="lazy">
+                    </figure>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--SERVICIOS-->
+    <div class="container text-center">
+        <hr>
+        <div class="container p-2 align-items-center">
+            <p>QUE HACEMOS</p>
+            <h1>Somos una plataforma dedicada al intercambio de material educativo.</h1>
+        </div>
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card__service box__card-primary">
+                    <img src="{{url_for('static', filename='images/Services/grid.png')}}" alt="">
+                    <h2>Encuentra todo tipo de materiales</h2>
+                    <p>Sección General</p>
+                    <a href="{{ ('/comming-soon') }}">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card__service box__card-primary">
+                    <img src="{{url_for('static', filename='images/Services/camera.png')}}" alt="">
+                    <h2>Vídeo</h2>
+                    <p>Contenido multimedia gratuito</p>
+                    <a href="{{ ('/comming-soon') }}">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card__service box__card-primary">
+                    <img src="{{url_for('static', filename='images/Services/headphone.png')}}" alt="">
+                    <h2>Audio</h2>
+                    <p>Disfruta de la sección de audio que tenemos preparada para ti</p>
+                    <a href="{{ ('/comming-soon') }}">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card__service box__card-primary">
+                <img src="{{url_for('static', filename='images/Services/file.png')}}" alt="">
+                <h2>Libros y Documentos</h2>
+                <p>Aquí reside la biblioteca de la comunidad</p>
+                <a href="{{ ('/comming-soon') }}">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- COMENTARIOS -->
     <div class="container py-3 mt-3 d-flex justify-content-center">
         <div class="highlight">
             <div class="mx-auto p-2">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-bd-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Abrir comentarios
                 </button>
             </div>
@@ -59,9 +182,9 @@
                     <div class="container py-1 mt-2 border border-secondary-subtle rounded-3 shadow-lg">
                       <div class="col me-auto p-2 d-flex justify-content-between">
                         <strong class="justify-content-md-start">
-                            {% if comment.commenter %}
+                            {% if comment.author %}
                             <span class="badge text-bg-dark fs-6 border">
-                                {{ comment.commenter.username }}
+                                {{ comment.author.username }}
                             </span>
                             {% else %}
                             <span class="badge text-bg-dark fs-6 border">
@@ -70,7 +193,6 @@
                             {% endif %}
                         </strong>
                         <small class="ms-2 mb-2">
-                            Publicado
                             {% if comment.posted %}
                                 {{ comment.posted.strftime("%A, %d %B %Y at %H:%M") }}
                             {% else %}
@@ -98,138 +220,11 @@
                         </form>
                     </div>
                 {% else %}
-                    <div class="form-floating mb-3">
-                      <textarea class="form-control" placeholder="Deja un comentario" id="floatingTextareaDisabled" disabled></textarea>
-                      <label for="floatingTextareaDisabled">Comentarios</label>
+                    <div class="row mb-3 container themed-container mb-3">
+                      <input name="contents" type="text" class="form-control rounded" placeholder="Inicia sesión para interactuar" aria-label="Deja un comentario" aria-describedby="button-addon2" disabled>
                     </div>
                 {% endif %}
               </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Generador de confianza -->
-    <div class="container text-center">
-        <div class="container p-2 align-items-center">
-            <h1>Encuentra todo tipo de materiales educativos</h1>
-            <br>
-            <hr>
-        </div>
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="card box__card-primary">
-                    <div class="card-body p-2">
-                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
-                        <h2>Gestión</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, nisi iure. Quo, ipsa omnis, nostrum vitae tempore expedita enim non maiores, soluta quae est esse quidem provident adipisci neque odio?</p>
-                    </div>
-                </div>
-            </div>
-          <div class="col">
-            <div class="card box__card-primary">
-                <div class="card-body p-2">
-                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
-                    <h2>Análisis</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, nisi iure. Quo, ipsa omnis, nostrum vitae tempore expedita enim non maiores, soluta quae est esse quidem provident adipisci neque odio?</p>
-                </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card box__card-primary">
-                <div class="card-body p-2">
-                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
-                    <h2>Calidad</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, nisi iure. Quo, ipsa omnis, nostrum vitae tempore expedita enim non maiores, soluta quae est esse quidem provident adipisci neque odio?</p>
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-
-    <!-- HEROES -->
-    <div class="px-4 pt-5 my-5 text-center">
-        <h1 class="display-4 fw-bold text-body-emphasis">Centered screenshot</h1>
-        <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-          </div>
-        </div>
-        <div class="overflow-hidden clearfix img__heroe">
-            <figure class="figure my-2 px-3">
-                <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}" class="figure-img img-fluid shadow-lg mb-4" alt="..." width="700" height="500" loading="lazy">
-            </figure>
-        </div>
-    </div>
-    <!--SERVICIOS-->
-    <div class="container text-center">
-        <hr>
-        <div class="container p-2 align-items-center">
-            <p>QUE HACEMOS</p>
-            <h1>Somos una plataforma dedicada al intercambio de material educativo.</h1>
-        </div>
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/grid.png')}}" alt="">
-                    <h2>Control empresarial completo</h2>
-                    <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                    <a href="#">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/cart.png')}}" alt="">
-                    <h2>Control empresarial completo</h2>
-                    <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                    <a href="#">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/camera.png')}}" alt="">
-                    <h2>Control empresarial completo</h2>
-                    <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                    <a href="#">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/headphone.png')}}" alt="">
-                    <h2>Control empresarial completo</h2>
-                    <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                    <a href="#">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                <img src="{{url_for('static', filename='images/Services/location.png')}}" alt="">
-                <h2>Control empresarial completo</h2>
-                <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                <img src="{{url_for('static', filename='images/Services/file.png')}}" alt="">
-                <h2>Control empresarial completo</h2>
-                <p>Pore et dolore magna aliqua. Ut enim ad minim veniam, quis nos trud exercitation</p>
-                <a href="#">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                </div>
             </div>
         </div>
     </div>

@@ -2,36 +2,13 @@
     background: linear-gradient(#f4693f, transparent);
     color: #333;
 }
-.perfil-usuario .sombra {
-    position: absolute;
-    display: block;
-    background: linear-gradient(transparent,rgba(0, 0, 0, .5));
-    width: 100%;
-    height: 50%;
-    bottom: 0;
-    left: 0;
-}
-.perfil-usuario .portada-perfil,
-.perfil-usuario .sombra {
-    border-radius: 0 0 20px 20px;
-}
+
 .bg-colorgradient {
     background-color: #ffa680;
     background-image: linear-gradient(180deg, #ffa480 0%, #dfc2b6 33%, #ffece4e7 66%, #ffffff 100%);    
 }
 .perfil-usuario img {
     width: 100%;
-}
-.contenedor-perfil {
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.perfil-usuario .contenedor-perfil {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
 }
 .perfil-usuario .portada-perfil {
     display: block;
@@ -43,17 +20,18 @@
     margin-bottom: .5rem;
 }
 .perfil-usuario .avatar-perfil {
-    display: block;
-    width: 230px;
-    height: 230px;
+    width: 9rem;
+    height: 9rem;  
     background-color: #D9DCF1;
-    position: absolute;
-    bottom: -65px;
-    left: 4rem;
     border-radius: 50%;
     overflow: hidden;
     border: 8px solid #FFFFFF;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
+}
+.img-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .perfil-usuario .cambiar-foto {
     position: absolute;
@@ -110,24 +88,10 @@
     transition: all ease-in 100ms;
 }
 .perfil-usuario .lista-perfil .col:hover {
-    background-color: #4CB0C6;
+    background-color: #e26136;
     color: #fff;
 }
 
-.perfil-usuario .opciones-perfil {
-    display: block;
-    position: absolute;
-    right: 2rem;
-    top: 1rem;
-}
-.perfil-usuario .opciones-perfil button {
-    border: 0;
-    padding: 8px 20px;
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, .5);
-    color: #fff;
-    cursor: pointer;
-}
 .perfil-usuario .menu-perfil ul {
     display: flex;
     list-style: none;
@@ -156,8 +120,8 @@
 }
 
 .form-user {
-    background-color: #bbb5adf3;
-    background-image: linear-gradient(0deg, #b6b0a8f3 0%, #c5b9a2 100%);    
+    background-color: #ffa680;
+    background-image: linear-gradient(180deg, #ffa480 0%, #dfc2b6 33%, #ffece4e7 66%, #ffffff 100%);   
 }
 .mensaje a {
     color: inherit;
@@ -168,19 +132,27 @@
     color: #309B76;
     transform: scale(1.4)
 }
+
+/* RESPONSIVE */
+
 @media (max-width: 780px) {
     .perfil-usuario .contenedor-perfil {
         width: 100%;
     }
     .perfil-usuario .avatar-perfil {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 9rem;  
         left: calc(50% - 115px)
     }
     .perfil-usuario .datos-perfil {
-        bottom: 200px;
-        left: 0;
         width: 100%;
-        padding: 15px;
         text-align: center;
+        margin-top: 2rem;
+        position: relative;
+        display: block;
     }
     .perfil-usuario .bio-usuario {
         font-size: 1em;
