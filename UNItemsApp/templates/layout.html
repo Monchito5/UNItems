@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/colaboradores.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/bootstrap.scss')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='scss/_root.scss')}}">
@@ -118,6 +119,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ ('/perfilUser') }}">Perfil -<span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
           {% endif %}
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ ('/us') }}">Colaboradores</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

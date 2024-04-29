@@ -1,0 +1,36 @@
+.orderboxColaboradores{
+    margin-top: 1in;
+}
+
+.container__box-cardPrimaryCollab{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: -1.5in;
+    margin-right: -1.5in;
+}
+
+.teamImg{
+    width: 4.8in;
+    height: 3in;
+    border: 5px red dotted;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.teamImg img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; 
+    margin: auto; 
+}
+
+.hero {
+    background-color: #bf4000d0; 
+    color: #ffffff;
+    padding: 50px; 
+    text-align: center;
+}

@@ -1,0 +1,206 @@
+{% extends "layout.html" %}
+{% block titulo %} UNItems {% endblock %}
+{% block contenido %}
+
+{% block css %}{% endblock %}
+    <!-- Inicio -->
+    <main>
+       
+
+        <!--Sobre nosotros - Nuestro equipo-->
+
+        <div class="orderboxColaboradores">
+            <div class="about">
+                <div class="text__about">
+                    <h1>El equipo creativo más innovador</h1>
+                    <p>Aquí va un texto bien mamalon sobre nosotros y nuestro equipo donde
+                        nos decriba a nosotros como equipo, hechandonos un chingo de rosas 
+                        como si fueramos la mera mera verga.
+                    </p>
+                </div>
+
+                <div class="image__about">
+                    <img src="{{url_for('static', filename='images/About/about-1.png')}}" alt="">
+                    <img src="{{url_for('static', filename='images/About/about-2.png')}}" alt="">
+                </div>
+            </div>
+        </div>
+
+
+ <!-- Cards -->
+        <div class="container__trust container__card-primary">
+            <div class="trust card__primary">
+                <div class="text__trust text__card-primary">
+                    <h1>Encuentra todo tipo de materiales educativos</h1>
+                </div>
+                <!-- Scrollable modal -->
+                <div class="container__trust container__box-cardPrimaryCollab">
+
+                    <div class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="card__trust box__card-primary">
+                        <img src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Inge. Guillermo</h2>
+                        <p>La mera verga  del grupo.</p>
+                        </div>
+                    </div>
+                    
+
+                    <div class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                        <div class="card__trust box__card-primary">
+                        <img src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Inge. Alejandro</h2>
+                        <p>El q le ayuda a la mera verga.</p>
+                        </div>
+                    </div>
+
+                    <div class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                        <div class="card__trust box__card-primary">
+                        <img src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Cesar</h2>
+                        <p>Este we hizo una presentación.</p>
+                        </div>
+                    </div>
+
+                    <div class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                        <div class="card__trust box__card-primary">
+                        <img src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Luis</h2>
+                        <p>Sepa la verga que hizo. alaverga si le pongo menos texto
+                          se mueven las cards, mejor de a mucho texto :).
+                        </p>
+                        </div>
+                    </div>
+
+                    <div class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop5">
+                        <div class="card__trust box__card-primary">
+                        <img src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <h2>Angel¿</h2>
+                        <p>Pues tambien sepa la verga que ha hecho.
+                          alkshdoahdklashd texto de relleno ashjvgfajgdjgasdg.
+                        </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero">
+          <h1>¡Agradecimientos especiales!</h1>
+          <p>Agradecimientos especiales a Billie Eilish, Lucrecia, Mi mamá y por supuesto a
+            este agradable compañero que, con sus palabras, motivó al equipo.</p>
+            <img src="{{url_for('static', filename='images/Compañero.jpg')}}" alt="">
+      </div>
+      
+
+
+<!-- ========================
+ Modales------
+ ========================  -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Memingo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="teamImg">
+                <img src="{{url_for('static', filename='images/Team/team-1.jpg')}}" alt="">
+            </div>
+          El memingo es una persona bien chida y chambeadora, su correo bla bla bla, 
+          su numero telefonixo xxxxxx
+          y mas pendejadas aqui.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Alex</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="teamImg">
+            <img src="{{url_for('static', filename='images/Team/team-2.jpg')}}" alt="">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Cesar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="teamImg">
+            <img src="{{url_for('static', filename='images/Team/team-3.jpg')}}" alt="">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Luis</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="teamImg">
+            <img src="{{url_for('static', filename='images/Team/team-4.jpg')}}" alt="">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">El otro pendejo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="teamImg">
+            <img src="{{url_for('static', filename='images/Team/team-1.jpg')}}" alt="">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </main>
+{% endblock %}
