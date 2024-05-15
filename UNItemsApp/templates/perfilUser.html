@@ -6,10 +6,8 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="px-4">
-  <div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
-    <div class="container bg-light rounded py-3" style="--bs-bg-opacity: .3;">
-      
+<div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
+  <div class="container bg-light rounded py-3 px-4" style="--bs-bg-opacity: .3;">
     {% with messages = get_flashed_messages() %}
 
     {% if messages %}
@@ -23,24 +21,39 @@
     {% endif %}
 
     {% endwith %}
-      <div class="row align-items-center">
-        <div class="col-md-4 text-center"> <!-- Foto de perfil -->
-          <div class="avatar-perfil mb-3">
-            <div class="perfil-usuario position-relative">
-              <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo">
-            </div>
-          </div>
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center"> <!-- Foto de perfil -->
+        <div class="avatar-perfil mb-3">
+          <img class="img-thumbnail" id="img-perfil" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo" loading="lazy" style="filter: blur(10px); animation: fadeIn 1s ease-in-out forwards;">
+          <style>
+            @keyframes fadeIn {
+              0% { opacity: 0; }
+              100% { opacity: 1; filter: blur(0); }
+            }
+          </style>
         </div>
-        <div class="col-md-8 text-center"> <!-- Datos de usuario -->
-          <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
-          <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
-          <div class="row lista-perfil mb-2">
-            <div class="col">{{ current_user.age }} <span>años</span></div>
-            <div class="col">{{ current_user.email }}</div>
-            <div class="col">{{ current_user.schoolgrade }}</div>
-          </div>
-          <a href="{{ ('/edit-user') }}"><button class="btn btn-bd-primary mb-2">Editar perfil</button></a>
+      </div>
+      <div class="col-md-8 text-center"> <!-- Datos de usuario -->
+        <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
+        {% if current_user.user_resume is not none %}
+        <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
+        {% else %}
+        <p class="bio-usuario mb-2">Sin descripción</p>
+        {% endif %}
+        <div class="row lista-perfil mb-2">
+          {% if current_user.age is not none %}
+          <div class="col">{{ current_user.age }} <span>años</span></div>
+          {% else %}
+          <div class="col"><span>Sin edad</span></div>
+          {% endif %}
+          <div class="col">{{ current_user.email }}</div>
+          {% if current_user.schoolgrade in ['Primaria', 'Secundaria', 'Preparatoria', 'Licenciatura', 'Ingenieria', 'Posgrado', 'Doctorado'] %}
+          <div class="col">{{ current_user.schoolgrade }}</div>
+          {% else %}
+          <div class="col"><span>Sin estudios</span></div>
+          {% endif %}
         </div>
+        <a href="{{ ('/edit-user') }}"><button class="btn btn-bd-primary mb-2">Editar perfil</button></a>
       </div>
     </div>
   </div>

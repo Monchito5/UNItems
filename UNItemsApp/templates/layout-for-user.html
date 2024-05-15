@@ -184,6 +184,12 @@
         </ul>
       </footer>
     </div>
+    <script>
+      const img = document.getElementById('img-perfil');
+      const imgOriginalUrl = img.src;
+      const imgCompressedUrl = imgOriginalUrl + '?w=' + screen.width + '&q=80';
+      img.src = imgCompressedUrl;
+    </script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/popper.js')}}"></script>

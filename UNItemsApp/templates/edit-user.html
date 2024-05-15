@@ -6,96 +6,114 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="px-4">
-  <div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
-    <div class="container bg-light rounded py-3" style="--bs-bg-opacity: .3;">
-      <div class="row align-items-center">
-        <div class="col-md-4 text-center"> <!-- Foto de perfil -->
-          <div class="avatar-perfil mb-3">
-            <div class="perfil-usuario position-relative">
-              <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo">
-            </div>
-          </div>
+<div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
+  <div class="container bg-light rounded py-3 px-4" style="--bs-bg-opacity: .3;">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center"> <!-- Foto de perfil -->
+        <div class="avatar-perfil mb-3"> 
+          <img class="img-thumbnail" id="img-perfil" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo" loading="lazy" style="filter: blur(10px); animation: fadeIn 1s ease-in-out forwards;">
+          <style>
+            @keyframes fadeIn {
+              0% { opacity: 0; }
+              100% { opacity: 1; filter: blur(0); }
+            }
+          </style>
         </div>
-        <div class="col-md-8 text-center"> <!-- Datos de usuario -->
-          <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
-          <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
-          <div class="row lista-perfil mb-2">
-            <div class="col">{{ current_user.age }} <span>años</span></div>
-            <div class="col">{{ current_user.email }}</div>
-            <div class="col">{{ current_user.schoolgrade }}</div>
-          </div>
-          <a href="{{ ('/perfilUser') }}"><button class="btn btn-bd-primary mb-2">Volver al perfil</button></a>
+      </div>
+      <div class="col-md-8 text-center"> <!-- Datos de usuario -->
+        <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
+        {% if current_user.user_resume is none %}
+        <p class="bio-usuario mb-2">Sin descripción</p>
+        {% else %}
+        <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
+        {% endif %}
+        <div class="row lista-perfil mb-2">
+          {% if current_user.age is not none %}
+          <div class="col">{{ current_user.age }} <span>años</span></div>
+          {% else %}
+          <div class="col"><span>Sin edad</span></div>
+          {% endif %}
+          <div class="col">{{ current_user.email }}</div>
+          {% if current_user.schoolgrade in ['Primaria', 'Secundaria', 'Preparatoria', 'Licenciatura', 'Ingenieria', 'Posgrado', 'Doctorado'] %}
+          <div class="col">{{ current_user.schoolgrade }}</div>
+          {% else %}
+          <div class="col"><span>Sin estudios</span></div>
+          {% endif %}
         </div>
+        <a href="{{ ('/perfilUser') }}"><button class="btn btn-bd-primary mb-2">Volver al perfil</button></a>
       </div>
     </div>
   </div>
-    <div class="container mt-3 py-3 border rounded shadow-lg form-user lista-perfil">
-      <form action="/edit-user-update/{{ current_user.id }}" class="row g-3" method="POST" enctype="multipart/form-data">
-          {% with messages = get_flashed_messages() %}
-
-          {% if messages %}
-          <br/>
-          {% for message in messages %}
-          <div class="alert alert-primary alert-dismissible" role="alert">
-              <strong>{{ message }}</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          {% endfor %}
-          {% endif %}
-
-          {% endwith %}
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="auth" value="U">
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Apodo</label>
-          <input name="username" type="text" value="{{ current_user.username }}" class="form-control" required>
-        </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Nombre Completo</label>
-          <input name="fullname" type="text" value="{{ current_user.fullname }}" class="form-control" required>
-        </div>
-        <div class="col-md-6">
-          <label for="inputCity" class="form-label">Correo Electrónico</label>
-          <input name="email" type="text" value="{{ current_user.email }}" class="form-control" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">Estudios</label>
-          <select name="schoolgrade" id="inputState" class="form-select">
-            <option selected>{{ current_user.schoolgrade }}</option>
-            <option value="Ninguno">Ninguno</option>
-            <option value="Primaria">Primaria</option>
-            <option value="Secundaria">Secundaria</option>
-            <option value="Preparatoria">Preparatoria</option>
-            <option value="Licenciatura">Licenciatura</option>
-            <option value="Ingenieria">Ingeniería</option>
-            <option value="Doctorado">Doctorado</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label for="inputZip" class="form-label">Edad</label>
-          <input name="age" type="text" value="{{ current_user.age }}" class="form-control" id="tentacles" min="0" max="100" required>
-        </div>
-        <div class="g-col-6">
-          <div class="p-2">
-            <img src="{{url_for('static', filename='icons/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
-            <label for="formFile" class="form-label"></label>
-            <input name="img" class="form-control" type="file" id="formFile">
-          </div>
-        </div>
-        <div class="g-col-6">
-          <label for="user_resume" class="form-label">Biografía
-            <span>(Maximo: 120 caracteres)</span>
-          </label>
-          <textarea name="user_resume" class="form-control border-secondary" id="user_resume" cols="20" rows="10" maxlength="120"></textarea>
-        </div>
-        <br><br>
-        <div class="col-12 mb-4">
-          <button type="submit" class="btn btn-bd-primary">Actualizar</button>
-        </div>
-      </form>
-    </div>
 </div>
+  <div class="container mt-3 py-3 border rounded shadow-lg form-user lista-perfil">
+    <form action="/edit-user-update/{{ current_user.id }}" class="row g-3" method="POST" enctype="multipart/form-data">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br/>
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="hidden" name="auth" value="U">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Apodo</label>
+        <input name="username" type="text" value="{{ current_user.username }}" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Nombre Completo</label>
+        <input name="fullname" type="text" value="{{ current_user.fullname }}" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Correo Electrónico</label>
+        <input name="email" type="text" value="{{ current_user.email }}" class="form-control" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Estudios</label>
+        <select class="form-select" name="schoolgrade" id="inputState" required>
+          <option class="form-option" value="" {% if not current_user.schoolgrade %}selected{% endif %} disabled>Selecciona...</option>
+          <option class="form-option" value="Ninguno" {% if current_user.schoolgrade == 'Ninguno' %}selected{% endif %}>Ninguno</option>
+          <option class="form-option" value="Primaria" {% if current_user.schoolgrade == 'Primaria' %}selected{% endif %}>Primaria</option>
+          <option class="form-option" value="Secundaria" {% if current_user.schoolgrade == 'Secundaria' %}selected{% endif %}>Secundaria</option>
+          <option class="form-option" value="Preparatoria" {% if current_user.schoolgrade == 'Preparatoria' %}selected{% endif %}>Preparatoria</option>
+          <option class="form-option" value="Licenciatura" {% if current_user.schoolgrade == 'Licenciatura' %}selected{% endif %}>Licenciatura</option>
+          <option class="form-option" value="Ingenieria" {% if current_user.schoolgrade == 'Ingenieria' %}selected{% endif %}>Ingenieria</option>
+          <option class="form-option" value="Doctorado" {% if current_user.schoolgrade == 'Doctorado' %}selected{% endif %}>Doctorado</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Edad</label>
+        {% if current_user.age is none %}
+        <input name="age" type="text" value="0" class="form-control" id="tentacles" min="0" max="100" required>
+        {% else %}
+        <input name="age" type="text" value="{{ current_user.age }}" class="form-control" id="tentacles" min="0" max="100" required>
+        {% endif %}
+      </div>
+      <div class="g-col-6">
+        <div class="p-2">
+          <img src="{{url_for('static', filename='icons/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+          <label for="formFile" class="form-label"></label>
+          <input name="img" class="form-control" type="file" id="formFile">
+        </div>
+      </div>
+      <div class="g-col-6">
+        <label for="user_resume" class="form-label">Biografía
+          <span>(Maximo: 120 caracteres)</span>
+        </label>
+        <textarea name="user_resume" class="form-control border-secondary" id="user_resume" cols="10" rows="5" maxlength="120" required></textarea>
+      </div>
+      <br><br>
+      <div class="col-12 mb-4">
+        <button type="submit" class="btn btn-bd-primary">Actualizar</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}
 
 {% block js %}{% endblock %}
