@@ -1,0 +1,92 @@
+{% extends "layout-for-admin.html" %}
+{% block titulo %} UNItems {% endblock %}
+
+<!-- Custom CSS -->
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin-anim_styles.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin_styles.css')}}"/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/animate-admin_copy.css')}}"/>
+
+<!-- DataTable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container p-3 table100 ver2 m-b-110">
+  {% with messages = get_flashed_messages() %}
+
+  {% if messages %}
+  <br/>
+  {% for message in messages %}
+  <div class="alert alert-primary alert-dismissible" role="alert">
+      <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% endwith %}   
+  <div class="container my-2">
+      <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <table data-vertable="ver2" id="datatable_users" class="table table-striped">
+                  <caption>
+                      Vista de administrador
+                  </caption>
+                  <thead class="row100 head">
+                      <tr>
+                          <th class="column100 column1 centered" data-column="column1">#id</th>
+                          <th class="column100 column2 centered" data-column="column2">Apodo</th>
+                          <th class="column100 column3 centered" data-column="column3">Correo Electrónico</th>
+                          <th class="column100 column4 centered" data-column="column4">Nombre Completo</th>
+                          <th class="column100 column5 centered" data-column="column5">Edad</th>
+                          <th class="column100 column6 centered" data-column="column6">Grado de estudios</th>
+                          <th class="column100 column7 centered" data-column="column7">Tipo de Usuario</th>
+                          <th class="column100 column7 centered" data-column="column8">Foto</th>
+                      </tr>
+                  </thead>
+                  <tbody class="row100 head">
+                    {% for row in user %}
+                        <tr>
+                            <td class="column100 column1 centered" data-column="column1">{{ row.0 }}</td>
+                            <td class="column100 column2 centered" data-column="column2">{{ row.1 }}</td>
+                            <td class="column100 column3 centered" data-column="column3">{{ row.2 }}</td>
+                            <td class="column100 column4 centered" data-column="column4">{{ row.4 }}</td>
+                            <td class="column100 column5 centered" data-column="column5">{{ row.5 }}</td>
+                            <td class="column100 column6 centered" data-column="column6">{{ row.6 }}</td>
+                            <td class="column100 column7 centered" data-column="column7">{{ row.7 }}</td>
+                            <td class="column100 column8 centered" data-column="column8">
+                            <img class="img-thumbnail" width="100" src="/uploads/profile/{{ row[8] }}" alt="">
+                            </td>
+                        </tr>
+                    {% endfor%}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+
+{% endblock %}
+
+<!-- Custom JS -->
+{% block js %} 
+<script>
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+    
+    myModal.addEventListener('shown.bs.modal', () => {
+      myInput.focus()
+    })
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+  </script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/admin_table.js')}}"></script>
+{% endblock %}

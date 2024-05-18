@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es", data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin_styles.css')}}">
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
+{% block css %} {% endblock %}
+<title>{% block titulo %} {% endblock %}</title>
+
+<!-- ================================ -->
+<!-- BARRA DE NAVEGACIÓN -->
+<!-- ================================ -->
+<header class="sticky-top">
+  <nav class="navbar bg-light fixed-top shadow-lg navbar-ly">
+    <div class="container-fluid">
+      <a href="{{ ('/') }}"><img src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" width="45" height="34" class="d-inline-block align-text-top" alt="logo"></a>
+      <a class="navbar-brand" href="{{ ('/admin') }}">Operaciones de administrador</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ ('/') }}">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Noticias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Ayuda</a>
+            </li>
+            {% if current_user.username=="sorum" %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
+            </li>
+            {% else %}
+            <p></p>
+            {% endif %}
+          </ul>
+          <hr>
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            {% if current_user.is_anonymous %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/loginUser') }}"><span class="badge text-bg-dark fs-6 border">Iniciar Sesión</span></a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/perfilUser') }}" aria-current="page"><span class="badge text-bg-primary fs-6 border">{{ current_user.username }}</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Herramientas
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ ('/admin-view') }}">Usuarios<img src="{{url_for('static', filename='icons/user-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li>
+                <li><a class="dropdown-item" href="{{ ('/admin-operations') }}">Operaciones<img src="{{url_for('static', filename='icons/administrator-tools-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ ('/admin-articles-view') }}">Artículos<img src="{{url_for('static', filename='icons/articles-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+                <li><a class="dropdown-item" href="{{ ('/admin-articles-operations') }}">Operaciones<img src="{{url_for('static', filename='icons/job-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ ('/admin-comments-view') }}">Comentarios<img src="{{url_for('static', filename='icons/comments-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+                <li><a class="dropdown-item" href="{{ ('/admin-comments-operations') }}">Operaciones<img src="{{url_for('static', filename='icons/db-config-icon.svg')}}" alt="" width="20" height="20" class="d-inline-block align-text-center m-1" ></a></li> 
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/logout') }}" aria-current="page"><span class="badge text-bg-dark fs-6 border">Cerrar Sesión</span></a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+</header>
+
+<div class="container mt-5 py-5 mb-5">
+  {% block contenido %} {% endblock %}
+</div>
+{% block js %} {% endblock %}
+</html>

@@ -7,118 +7,41 @@
     <script src="{{url_for('static', filename='js/color-modes.js')}}"></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/layout-main.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/bg-color.scss')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/colaboradores.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/custom.scss')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/mainHome.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='scss/variables.scss')}}">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/heroes/">
-    <link rel="shortcut icon" href="{{url_for('static', filename='assets/number-six-icon.svg')}}" type="image/x-icon">
-    <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+      .btn-bd-primary {
+        --bd-orange-bg: #f97b2c;
+        --bd-orange-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-orange-bg);
+        --bs-btn-border-color: var(--bd-orange-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #e07228;
+        --bs-btn-hover-border-color: #e07228;
+        --bs-btn-focus-shadow-rgb: var(--bd-orange-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #c84f23;
+        --bs-btn-active-border-color: #c84f23;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
     {% block css %}{% endblock %}
     <title>{% block titulo %} {% endblock %}</title>
 </head>
 <!-- ================================ -->
 <!-- CUERPO DE LA PÁGINA -->
 <!-- ================================ -->
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark border-bottom border-body shadow-lg" data-bs-theme="dark" aria-label="Navbar-4">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-          <i class="fa fa-swatchbook"></i> UNItems
-      </a>
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="navbar-collapse collapse" id="navbarsExample04" style="">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/Us">Colaboradores</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item">
-                  {% if current_user.is_anonymous %}
-                <a class="dropdown-item" aria-current="page" href="/loginUser"  tabindex="-1">Inicia sesion</a>
-              {% else %}
-              <p></p>
-              {% endif %}
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              <a class="dropdown-item" aria-current="page" href="{{ ('/register') }}">Regístrate <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
-              </a>
-            </li>
-            <li><a class="dropdown-item">
-              <a class="dropdown-item" aria-current="page" href="{{ ('/perfilUser') }}">Perfil <span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>              
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <i class="fa fa-swatchbook"></i> UNItems
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          {% if current_user.is_anonymous %}
-          <a class="nav-link active" aria-current="page" href="{{ ('/loginUser') }}">Inicia Sesión</a>
-          {% else %}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ ('/perfilUser') }}">Perfil -<span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
-          {% endif %}
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acerca de
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" aria-current="page" href="#"  tabindex="-1">Blog</a>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-              <a class="dropdown-item" aria-current="page" href="#">Ayuda</a>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <li class="nav-item">
-          <a class="nav-link ">Porque tus materiales y apuntes merecen más de una historia.</a>
-        </li>
-      </ul>
-      {% if current_user.username=="sorum" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
-        </li>
-        {% else %}
-        <p></p>
-      {% endif %}
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  </div>
-</nav>
-
+<body>
 <!-- Cambio color -->
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="check2" viewBox="0 0 16 16">
@@ -136,13 +59,42 @@
   </symbol>
 </svg>
 
+<!-- Botón cambiar aspecto -->
+   <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+      <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+      <span class="visually-hidden" id="bd-theme-text">Cambiar aspecto</span>
+    </button>
+    <ul class="dropdown-menu shadow" aria-labelledby="bd-theme-text">
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+          Claro
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+          Oscuro
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class=" dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+          Predeterminado
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
 <header>
-  {% block navbar %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg" aria-label="Offcanvas navbar large">
-    <div class="container-fluid px-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
       <a href="{{ ('/') }}"><img src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" width="40" height="36" class="d-inline-block align-text-top" alt="logo"></a>
       <a class="navbar-brand" href="{{ ('/') }}">UNItems</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -178,13 +130,13 @@
                   <a class="dropdown-item" href="{{ ('/perfilUser') }}" aria-current="page"><span class="badge btn btn-bd-primary fs-6 border">{{ current_user.username }}</span></a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="{{ ('/comming-soon') }}"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>
+                  <a class="dropdown-item" href="#"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>
                 </li>
                 <li class="nav-item">
                 <a class="dropdown-item" href="{{ ('/logout') }}" aria-current="page"><span class="badge text-bg-dark fs-6 border">Cerrar Sesión</span></a>
                 </li>
                 {% endif %}
-                {% if current_user.auth=="A" %}
+                {% if current_user.username=="sorum" %}
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -192,38 +144,11 @@
                   <a class="dropdown-item" href="{{ ('/admin') }}"><span class="badge text-bg-dark fs-6 border">Administrador</span></a>
                 </li>
                 {% else %}
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
                 {% endif %}
               </ul>
-              <!-- Cambiar color -->
-              <li class="nav-item dropdown-center bd-mode-toggle mt-1">
-                <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
-                  <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-                  <span class="visually-hidden" id="bd-theme-text">Cambiar aspecto</span>
-                </button>
-                <ul class="dropdown-menu shadow-lg" style="width: 30px;" aria-labelledby="bd-theme-text">
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-                      Claro
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-                      Oscuro
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class=" dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
-                      Auto
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                </ul>
-              </li>
             </li>
           </ul>
           <!-- <form class="d-flex mt-3 mt-lg-0" role="search">
@@ -234,25 +159,23 @@
       </div>
     </div>
   </nav>
-  {% endblock %}
 </div>
 </header>
 
   <main>
     {% block contenido %} {% endblock %}
   </main>
-    {% block footer %}
     <!-- ======================= -->
     <!-- FOOTER -->
     <!-- ======================= -->
-    <div class="container-fluid">
-      <footer class="d-flex flex-wrap justify-content-center align-items-center py-3">
-        <div class="d-flex align-items-center mb-3 mb-md-0">
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
           <a href="{{ ('/') }}" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
             <img class="bi me-2" width="200" height="115" src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo">
           </a>
         </div>
-        <ul class="nav col-12 col-md-4 justify-content-center list-unstyled d-flex mb-0">
+        <ul class="nav col-md-4 justify-content-end list-inline d-flex">
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Noticias</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Comunidad</a></li>
@@ -261,8 +184,12 @@
         </ul>
       </footer>
     </div>
-    {% endblock %}
-    <script src="{{url_for('static', filename='js/__index.js')}}"></script>
+    <script>
+      const img = document.getElementById('img-perfil');
+      const imgOriginalUrl = img.src;
+      const imgCompressedUrl = imgOriginalUrl + '?w=' + screen.width + '&q=80';
+      img.src = imgCompressedUrl;
+    </script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/popper.js')}}"></script>

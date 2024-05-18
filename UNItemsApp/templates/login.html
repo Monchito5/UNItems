@@ -31,12 +31,13 @@
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input name="password" type="password" placeholder="Contraseña" required>
+          <input class="password-input" type="password" id="passwordInput" name="password" placeholder="Contraseña" required>
+          <button type="button" id="passwordToggle" class="btn password-toggle"><i class="far fa-eye-slash"></i></button>
         </div>
         <input type="submit" value="Continuar" class="btn-b solid">
       </form>
 
-      <form action="/loginRegister" class="sign-up-form" method="post">
+      <form action="/registerUser" class="sign-up-form" method="post">
         <h2 class="title">Regístrate</h2>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-field">
@@ -45,11 +46,7 @@
           </div>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input name="username" type="text" placeholder="Username" required>
-        </div>
-        <div class="input-field mb-3 py-2">
-            <img src="{{url_for('static', filename='icons/number-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
-            <input type="number" class="form-control" placeholder="Ingresa tu edad" id="tentacles" name="age" min="0" max="100" required>
+          <input name="username" type="text" placeholder="Apodo" required>
         </div>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
@@ -57,25 +54,8 @@
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input name="password" type="password" placeholder="Contraseña" required>
-        </div>
-        <div class="grid text-center rounded" style="background-color: rgba(216, 237, 255, 0);">
-            <div class="g-col-9">
-                <div class="input-group mt-3 mb-2 g-start-2 input-school">
-                    <img src="{{url_for('static', filename='icons/school-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-center m-1" style="opacity: 0.3;">
-                    <select class="form-select" id="inputGroupSelect02" name="schoolgrade" required>
-                      <option selected>Elige tu nivel de estudios...</option>
-                      <option value="Ninguno">Ninguno</option>
-                      <option value="Primaria">Primaria</option>
-                      <option value="Secundaria">Secundaria</option>
-                      <option value="Preparatoria">Preparatoria</option>
-                      <option value="Licenciatura">Licenciatura</option>
-                      <option value="Ingenieria">Ingeniería</option>
-                      <option value="Doctorado">Doctorado</option>
-                    </select>
-                    <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
-                </div>
-            </div>
+          <input class="password-input" type="password" id="passwordInputR" name="password" placeholder="Contraseña" required>
+          <button type="button" id="passwordToggleR" class="btn password-toggle"><i class="far fa-eye-slash"></i></button>
         </div>
           <br>
             <div class="form-check check-p">

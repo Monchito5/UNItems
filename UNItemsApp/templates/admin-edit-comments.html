@@ -1,0 +1,54 @@
+{% extends "layout-for-user.html" %}
+{% block titulo %} Artículos {{ current_user.username }} {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/profile-styles.css')}}">
+{% endblock %}
+
+{% block contenido %}
+<body>
+  <section class="p-5 perfil-usuario">
+    <div class="container-xl mt-5 mb-2 p-3 bg-light rounded-4 shadow-lg">
+      <div class="container p-2 bg-light rounded-5 shadow" style="--bs-bg-opacity: .3;">
+        <div class="container text-center">
+        <style>
+        .mensaje a {
+            color: inherit;
+            margin-right: .5rem;
+            display: inline-block;
+        }
+        .mensaje a:hover {
+            color: #309B76;
+            transform: scale(1.4)
+        }
+        </style>
+        <div class="container-sm rounded-4 form-user shadow-sm ">
+          {% for row in comments %}
+          <form action="/admin-update-comments" class="row g-3" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <h2>Agrega un comentario</h2>
+            <div class="col-12 mb-4">
+              <h2 class="blog-post-title mb-1">{{ row.0 }}</h2>
+              <label class="form-label">Fecha</label>
+              <input name="date" value="{{ row.1 }}" type="date" class="form-control"  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required>
+            </div>
+            <div class="form-floating">
+                <textarea name="contents" value="Comentario" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">{{ row.2 }}</label>
+            </div>
+            <br><br>
+            <div class="col-12 mb-4">
+              <button type="submit" class="btn btn-primary">Agregar comentario</button>
+            </div>
+          </form>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+{% endblock %}
+
+{% block js %}{% endblock %}
