@@ -37,8 +37,9 @@
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Offcanvas navbar large">
-    <div class="container-fluid">
+  {% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg" aria-label="Offcanvas navbar large">
+    <div class="container-fluid px-4">
       <a href="{{ ('/') }}"><img src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" width="40" height="36" class="d-inline-block align-text-top" alt="logo"></a>
       <a class="navbar-brand" href="{{ ('/') }}">UNItems</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
@@ -130,23 +131,25 @@
       </div>
     </div>
   </nav>
+  {% endblock %}
 </div>
 </header>
 
   <main>
     {% block contenido %} {% endblock %}
   </main>
+    {% block footer %}
     <!-- ======================= -->
     <!-- FOOTER -->
     <!-- ======================= -->
-    <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
+    <div class="container-fluid">
+      <footer class="d-flex flex-wrap justify-content-center align-items-center py-3">
+        <div class="d-flex align-items-center mb-3 mb-md-0">
           <a href="{{ ('/') }}" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
             <img class="bi me-2" width="200" height="115" src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo">
           </a>
         </div>
-        <ul class="nav col-md-4 justify-content-end list-inline d-flex">
+        <ul class="nav col-12 col-md-4 justify-content-center list-unstyled d-flex mb-0">
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Noticias</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Comunidad</a></li>
@@ -155,6 +158,8 @@
         </ul>
       </footer>
     </div>
+    {% endblock %}
+    <script src="{{url_for('static', filename='js/__index.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/popper.js')}}"></script>

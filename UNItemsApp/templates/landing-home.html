@@ -3,45 +3,52 @@
 {% block titulo %} UNItems {% endblock %}
 {% block contenido %}
 <!-- Inicio -->
-<div class="px-4">
-    <div class="container py-3 mt-3">
-        <div class="row gx-5 p-3 pb-0 pe-lg-0 pt-lg-5 mt-5 align-items-center rounded-3 border shadow-lg">
-            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                    <h1>UNItems</h1>
-                    {% if current_user.is_anonymous %}
-                    <p>Únete a nuestra comunidad y disfruta de los beneficios.</p>
-                    {% else %}
-                    <p class="lead">¡Bienvenido! <span class="fw-bolder">{{ current_user.username }}</span></p>
-                    <p class="lead">Comparte y Disfruta de la experiencia que ofrece UNItems.</p>
-                    {% endif %}
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                    {% if current_user.is_anonymous %}
-                    <a href="{{ ('/login') }}"><button type="button" class="btn btn-bd-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
-                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary px-4">Noticias</button></a>
-                    {% else %}
-                    <a href="{{ ('/comming-soon') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
-                    {% endif %}
+    <!-- Carousel -->
+    <div class="container-fluid m-0 p-0">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='images/Cover/cover_1.jpg')}}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/Cover/cover_2.jpg')}}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/Cover/chest_cover_0.jpg')}}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/Cover/cover_4.jpg')}}" class="d-block w-100" alt="...">
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden clearfix">
-                <figure class="figure my-2 p-3 img__heroe">
-                    <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}" class="figure-img img-fluid rounded-lg-3" alt="...">
-                </figure>
+            <div class="carousel-control-prev position-absolute top-50 translate-middle-y start-0 me-3 ps-3" style="z-index: 1; left: 1rem; opacity: 0.5">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" class="btn btn-dark border-0" aria-label="Previous">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="carousel-control-next position-absolute top-50 translate-middle-y end-0 ms-3 pe-3" style="z-index: 1; right: 1rem; opacity: 0.5">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" class="btn btn-dark border-0" aria-label="Next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </div>
-    <br>
 
     <!-- Generador de confianza -->
-    <div class="container text-center">
+    <div class="container text-center mt-5">
         <div class="container p-2 align-items-center">
             <h1>Encuentra todo tipo de materiales educativos</h1>
             <br>
             <hr>
         </div>
         <div class="row align-items-center">
-            <div class="col">
-                <div class="card box__card-primary">
+            <div class="col col-md-4 col-lg-4 col-xl-4">
+                <div class="card h-100 box__card-primary">
                     <div class="card-body p-2">
                         <img class="card-image" src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
                         <h2>Gestión</h2>
@@ -51,36 +58,36 @@
                     </div>
                 </div>
             </div>
-          <div class="col">
-            <div class="card box__card-primary">
-                <div class="card-body p-2">
-                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
-                    <h2>Análisis</h2>
-                    <p class="card-text">Utilizamos datos para optimizar funciones y servicios, 
-                    asegurando una plataforma más eficiente.
-                    </p>
+            <div class="col col-md-4 col-lg-4 col-xl-4">
+                <div class="card h-100 box__card-primary">
+                    <div class="card-body p-2">
+                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
+                        <h2>Análisis</h2>
+                        <p class="card-text">Utilizamos datos para optimizar funcion y servicios, 
+                        asegurando una plataforma más eficiente.
+                        </p>
+                    </div>
                 </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="card box__card-primary">
-                <div class="card-body p-2">
-                    <img class="card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
-                    <h2>Calidad</h2>
-                    <p class="card-text">Velamos por la seguridad y la fiabilidad de las transacciones. 
-                    Además ofrecemos un entorno confiable y transparente.</p>
+            <div class="col col-md-4 col-lg-4 col-xl-4">
+                <div class="card h-100 box__card-primary">
+                    <div class="card-body p-2">
+                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
+                        <h2>Calidad</h2>
+                        <p class="card-text">Velamos por la seguridad y la fiabilidad de las transacciones. 
+                        Además ofrecemos un entorno confiable y transparente.</p>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
     </div>
 
     <!-- HEROES -->
-    <div class="container">
+    <div class="m-0 p-0 container-fluid bg-color-secondary">
         <div class="row align-items-center px-4 pt-5 my-5 text-center">
             <div class="col-md-7">
                 <h1 class="display-4 fw-bold text-body-emphasis">Comunidad</h1>
-                <p class="lead mb-4">En nuestra plataforma, proporcionamos a los alumnos una solución integral 
+                <p class="px-4 lead mb-4 fw-normal lh-base">En nuestra plataforma, proporcionamos a los alumnos una solución integral 
                     para sus necesidades educativas, creando un espacio donde la comunidad estudiantil puede colaborar 
                     y beneficiarse mutuamente. Nuestro enfoque se centra en la comodidad, la seguridad y la calidad, 
                     brindando a nuestros usuarios una experiencia confiable y satisfactoria en cada transacción.</p>
@@ -89,30 +96,29 @@
                         <button type="button" class="btn btn-bd-primary btn-lg px-4 me-sm-3">Inicia Sesión</button>
                     </a>
                     <a href="{{ ('/comming-soon') }}">
-                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Blog</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4 me-sm-3 fw-bold">Blog</button>
                     </a>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="overflow-hidden clearfix mb-3">
                     <figure class="figure my-2 px-3 img__heroe">
-                        <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}"  class="figure-img img-fluid" alt="..." width="500" height="300" loading="lazy">
+                        <img src="{{url_for('static', filename='images/Cover/undraw_Code_thinking_re_gka2.svg')}}"  class="figure-img img-fluid" alt="..." width="500" height="300" loading="lazy">
                     </figure>
                 </div>
             </div>
         </div>
-        </div>
     </div>
     <!--SERVICIOS-->
-    <div class="container text-center">
+    <div class="container-fluid text-center">
         <hr>
-        <div class="container p-2 align-items-center">
+        <div class="container align-items-center">
             <p>QUE HACEMOS</p>
             <h1>Somos una plataforma dedicada al intercambio de material educativo.</h1>
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <div class="card__service box__card-primary">
+                <div class="card__service box__card-primary h-100">
                     <img src="{{url_for('static', filename='images/Services/grid.png')}}" alt="">
                     <h2>Encuentra todo tipo de materiales</h2>
                     <p>Sección General</p>
@@ -153,7 +159,6 @@
             </div>
         </div>
     </div>
-    <hr>
 
     <!-- COMENTARIOS -->
     <div class="container py-3 mt-3 d-flex justify-content-center">
@@ -228,7 +233,34 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div class="container-fluid text-center mb-5">
+        <div class="row gx-5 p-3 pb-0 pe-lg-0 pt-lg-5 mt-5 align-items-center rounded-3 shadow-lg">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                    <h1>UNItems</h1>
+                    {% if current_user.is_anonymous %}
+                    <p>Únete a nuestra comunidad y disfruta de los beneficios.</p>
+                    {% else %}
+                    <p class="lead">¡Bienvenido! <span class="fw-bolder">{{ current_user.username }}</span></p>
+                    <p class="lead">Comparte y Disfruta de la experiencia que ofrece UNItems.</p>
+                    {% endif %}
+                <div class="d-grid gap-2 d-md-flex justify-content-center mb-4 mb-lg-3">
+                    {% if current_user.is_anonymous %}
+                    <a href="{{ ('/login') }}"><button type="button" class="btn btn-bd-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
+                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary px-4 fw-bold">Noticias</button></a>
+                    {% else %}
+                    <a href="{{ ('/comming-soon') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1 overflow-hidden clearfix">
+                <figure class="figure my-2 p-3 img__heroe">
+                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" class="figure-img img-fluid rounded-lg-3" alt="...">
+                </figure>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block js %}
