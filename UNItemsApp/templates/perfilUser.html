@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout-for-user.html" %}
 {% block titulo %} {{ current_user.username }} {% endblock %}
 
 {% block css %}
@@ -6,48 +6,45 @@
 {% endblock %}
 
 {% block contenido %}
-<body>
-  <div class="p-5 perfil-usuario">
-    <div class="container mt-5 mb-2 p-3 bg-light rounded shadow-lg">
-      <div class="container p-2 bg-light rounded-2 shadow" style="--bs-bg-opacity: .3;">
-        <div class="container text-center">
-          <div class="portada-perfil bg-colorgradient">
-              <div class="avatar-perfil">
-                <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="">
-              </div>
-              <div class="datos-perfil">
-                <h4 class="titulo-usuario">{{ current_user.fullname }}</h4>
-                <p class="bio-usuario">Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
-                <div class="container text-center">
-                  <div class="row lista-perfil">
-                    <div class="col">
-                      {{ current_user.age }}
-                    </div>
-                    <div class="col">
-                      {{ current_user.email }}
-                    </div>
-                    <div class="col">
-                      {{ current_user.schoolgrade }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="opciones-perfil">
-              <a href="{{ ('/edit-user') }}"><button>Editar Perfil</button></a>
-            </div>
-            <div class="menu-perfil">
-                <ul>
-                  <li><a href="{{ ('/articles') }}" title="">Artículos</a></li>
-                  <li><a href="{{ ('/comments') }}" title="">Comentarios</a></li>
-                </ul>
+<div class="px-4">
+  <div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
+    <div class="container bg-light rounded py-3" style="--bs-bg-opacity: .3;">
+      
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br/>
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center"> <!-- Foto de perfil -->
+          <div class="avatar-perfil mb-3">
+            <div class="perfil-usuario position-relative">
+              <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo">
             </div>
           </div>
+        </div>
+        <div class="col-md-8 text-center"> <!-- Datos de usuario -->
+          <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
+          <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
+          <div class="row lista-perfil mb-2">
+            <div class="col">{{ current_user.age }} <span>años</span></div>
+            <div class="col">{{ current_user.email }}</div>
+            <div class="col">{{ current_user.schoolgrade }}</div>
+          </div>
+          <a href="{{ ('/edit-user') }}"><button class="btn btn-bd-primary mb-2">Editar perfil</button></a>
         </div>
       </div>
     </div>
   </div>
-</body>
-
+</div>
 {% endblock %}
 
 {% block js %}{% endblock %}

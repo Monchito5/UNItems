@@ -1,100 +1,101 @@
 {% extends "layout-for-user.html" %}
-{% block titulo %} Perfil - Editar {{ current_user.username }} {% endblock %}
+{% block titulo %} Editar {{ current_user.username }} {% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/profile-styles.css')}}">
 {% endblock %}
 
 {% block contenido %}
-
-<body>
-  <section class="p-5 perfil-usuario">
-    <div class="container-xl mt-5 mb-2 p-3 bg-light rounded-4 shadow-lg">
-      <div class="container p-2 bg-light rounded-5 shadow" style="--bs-bg-opacity: .3;">
-        <div class="container text-center">
-          <div class="portada-perfil bg-colorgradient">
-            <div class="avatar-perfil">
-              <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="">
-                  </div>
-                  <div class="datos-perfil">
-                    <h4 class="titulo-usuario">{{ current_user.fullname }}</h4>
-                    <p class="bio-usuario">Lorem ipsum dolor sit, amet consectetur adipisicing.</p>
-                    <div class="container text-center">
-                    </div>
-                    </div>
-                    <div class="opcciones-perfil">
-                      <a href="{{ ('/perfilUser') }}"><button>Volver a perfil</button></a>
-                    </div>
-                </div>
-                <div class="menu-perfil">
-                    <ul>
-                      <li><a href="{{ ('/articles') }}" title="">Artículos</a></li>
-                      <li><a href="{{ ('/comments') }}" title="">Comentarios</a></li>
-                    </ul>
-                </div>
-        <style>
-        .mensaje a {
-            color: inherit;
-            margin-right: .5rem;
-            display: inline-block;
-        }
-        .mensaje a:hover {
-            color: #309B76;
-            transform: scale(1.4)
-        }
-        </style>
-        <br>
-          <div class="container-sm rounded-4 form-user shadow-sm">
-            <form action="/edit-user-update" class="row g-3" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-              <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Apodo</label>
-                <input name="username" type="text" value="{{ current_user.username }}" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Nombre Completo</label>
-                <input name="fullname" type="text" value="{{ current_user.fullname }}" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="inputCity" class="form-label">Correo Electrónico</label>
-                <input name="email" type="text" value="{{ current_user.email }}" class="form-control" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
-              </div>
-              <div class="col-md-4">
-                <label for="inputState" class="form-label">Estudios</label>
-                <select name="schoolgrade" id="inputState" class="form-select">
-                  <option selected>{{ current_user.schoolgrade }}</option>
-                  <option value="Ninguno">Ninguno</option>
-                  <option value="Primaria">Primaria</option>
-                  <option value="Secundaria">Secundaria</option>
-                  <option value="Preparatoria">Preparatoria</option>
-                  <option value="Licenciatura">Licenciatura</option>
-                  <option value="Ingenieria">Ingeniería</option>
-                  <option value="Doctorado">Doctorado</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label for="inputZip" class="form-label">Edad</label>
-                <input name="age" type="text" value="{{ current_user.age }}" class="form-control" id="tentacles" min="0" max="100" required>
-              </div>
-              <div class="g-col-6">
-                <div class="p-2">
-                  <img src="{{url_for('static', filename='assets/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
-                  <label for="formFile" class="form-label"></label>
-                  <input name="img" class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-              <br><br>
-              <div class="col-12 mb-4">
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-              </div>
-            </form>
+<div class="px-4">
+  <div class="px-3 py-3 mt-5 mb-2 perfil-usuario shadow-lg">
+    <div class="container bg-light rounded py-3" style="--bs-bg-opacity: .3;">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center"> <!-- Foto de perfil -->
+          <div class="avatar-perfil mb-3">
+            <div class="perfil-usuario position-relative">
+              <img class="img-thumbnail" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo">
+            </div>
           </div>
+        </div>
+        <div class="col-md-8 text-center"> <!-- Datos de usuario -->
+          <h4 class="titulo-usuario mb-2">{{ current_user.fullname }}</h4>
+          <p class="bio-usuario mb-2">{{ current_user.user_resume }}</p>
+          <div class="row lista-perfil mb-2">
+            <div class="col">{{ current_user.age }} <span>años</span></div>
+            <div class="col">{{ current_user.email }}</div>
+            <div class="col">{{ current_user.schoolgrade }}</div>
+          </div>
+          <a href="{{ ('/perfilUser') }}"><button class="btn btn-bd-primary mb-2">Volver al perfil</button></a>
         </div>
       </div>
     </div>
-  </section>
-</body>
+  </div>
+    <div class="container mt-3 py-3 border rounded shadow-lg form-user lista-perfil">
+      <form action="/edit-user-update/{{ current_user.id }}" class="row g-3" method="POST" enctype="multipart/form-data">
+          {% with messages = get_flashed_messages() %}
 
+          {% if messages %}
+          <br/>
+          {% for message in messages %}
+          <div class="alert alert-primary alert-dismissible" role="alert">
+              <strong>{{ message }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% endwith %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="auth" value="U">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Apodo</label>
+          <input name="username" type="text" value="{{ current_user.username }}" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Nombre Completo</label>
+          <input name="fullname" type="text" value="{{ current_user.fullname }}" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Correo Electrónico</label>
+          <input name="email" type="text" value="{{ current_user.email }}" class="form-control" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">Estudios</label>
+          <select name="schoolgrade" id="inputState" class="form-select">
+            <option selected>{{ current_user.schoolgrade }}</option>
+            <option value="Ninguno">Ninguno</option>
+            <option value="Primaria">Primaria</option>
+            <option value="Secundaria">Secundaria</option>
+            <option value="Preparatoria">Preparatoria</option>
+            <option value="Licenciatura">Licenciatura</option>
+            <option value="Ingenieria">Ingeniería</option>
+            <option value="Doctorado">Doctorado</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Edad</label>
+          <input name="age" type="text" value="{{ current_user.age }}" class="form-control" id="tentacles" min="0" max="100" required>
+        </div>
+        <div class="g-col-6">
+          <div class="p-2">
+            <img src="{{url_for('static', filename='icons/photo-icon.svg')}}" alt="" width="30" height="30" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+            <label for="formFile" class="form-label"></label>
+            <input name="img" class="form-control" type="file" id="formFile">
+          </div>
+        </div>
+        <div class="g-col-6">
+          <label for="user_resume" class="form-label">Biografía
+            <span>(Maximo: 120 caracteres)</span>
+          </label>
+          <textarea name="user_resume" class="form-control border-secondary" id="user_resume" cols="20" rows="10" maxlength="120"></textarea>
+        </div>
+        <br><br>
+        <div class="col-12 mb-4">
+          <button type="submit" class="btn btn-bd-primary">Actualizar</button>
+        </div>
+      </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}{% endblock %}

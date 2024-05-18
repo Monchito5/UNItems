@@ -7,71 +7,41 @@
     <script src="{{url_for('static', filename='js/color-modes.js')}}"></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/carrousel.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/colaboradores.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+      .btn-bd-primary {
+        --bd-orange-bg: #f97b2c;
+        --bd-orange-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-orange-bg);
+        --bs-btn-border-color: var(--bd-orange-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #e07228;
+        --bs-btn-hover-border-color: #e07228;
+        --bs-btn-focus-shadow-rgb: var(--bd-orange-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #c84f23;
+        --bs-btn-active-border-color: #c84f23;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
     {% block css %}{% endblock %}
     <title>{% block titulo %} {% endblock %}</title>
 </head>
 <!-- ================================ -->
 <!-- CUERPO DE LA PÁGINA -->
 <!-- ================================ -->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <i class="fa fa-swatchbook"></i> UNItems
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          {% if current_user.is_anonymous %}
-          <a class="nav-link active" aria-current="page" href="{{ ('/loginUser') }}">Inicia Sesión</a>
-          {% else %}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ ('/perfilUser') }}">Perfil -<span class="badge text-bg-primary fs-6">{{ current_user.username }}</span></a>
-          {% endif %}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ ('/us') }}">Colaboradores</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Acerca de
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" aria-current="page" href="#"  tabindex="-1">Blog</a>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-              <a class="dropdown-item" aria-current="page" href="#">Ayuda</a>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      {% if current_user.username=="sorum" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ ('/admin') }}">Administrador</a>
-        </li>
-        {% else %}
-        <p></p>
-      {% endif %}
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  </div>
-</nav>
-
+<body>
 <!-- Cambio color -->
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="check2" viewBox="0 0 16 16">
@@ -89,6 +59,36 @@
   </symbol>
 </svg>
 
+<!-- Botón cambiar aspecto -->
+   <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+      <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+      <span class="visually-hidden" id="bd-theme-text">Cambiar aspecto</span>
+    </button>
+    <ul class="dropdown-menu shadow" aria-labelledby="bd-theme-text">
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+          Claro
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+          Oscuro
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+      <li>
+        <button type="button" class=" dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+          Predeterminado
+          <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
@@ -111,9 +111,6 @@
               <a class="nav-link active" href="#">Noticias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/us">Colaboradores</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link active" href="#">Blog</a>
             </li>
             <li class="nav-item">
@@ -133,7 +130,7 @@
                   <a class="dropdown-item" href="{{ ('/perfilUser') }}" aria-current="page"><span class="badge btn btn-bd-primary fs-6 border">{{ current_user.username }}</span></a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="{{ ('/comming-soon') }}"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>
+                  <a class="dropdown-item" href="#"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>
                 </li>
                 <li class="nav-item">
                 <a class="dropdown-item" href="{{ ('/logout') }}" aria-current="page"><span class="badge text-bg-dark fs-6 border">Cerrar Sesión</span></a>
@@ -147,38 +144,11 @@
                   <a class="dropdown-item" href="{{ ('/admin') }}"><span class="badge text-bg-dark fs-6 border">Administrador</span></a>
                 </li>
                 {% else %}
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
                 {% endif %}
               </ul>
-              <!-- Cambiar color -->
-              <li class="nav-item dropdown-center bd-mode-toggle mt-1">
-                <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
-                  <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-                  <span class="visually-hidden" id="bd-theme-text">Cambiar aspecto</span>
-                </button>
-                <ul class="dropdown-menu shadow-lg" style="width: 30px;" aria-labelledby="bd-theme-text">
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-                      Claro
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-                      Oscuro
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class=" dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
-                      <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
-                      Auto
-                      <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-                    </button>
-                  </li>
-                </ul>
-              </li>
             </li>
           </ul>
           <!-- <form class="d-flex mt-3 mt-lg-0" role="search">
