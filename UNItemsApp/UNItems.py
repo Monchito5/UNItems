@@ -1,6 +1,7 @@
 from multiprocessing import connection
 import re
 from flask import Flask, render_template, session, url_for, request, redirect, jsonify, flash, send_from_directory
+import requests
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import CSRFProtect
@@ -12,7 +13,9 @@ import smtplib
 from smtplib import SMTPException
 from threading import Thread
 from flask_mail import Mail, Message
-from email.message import EmailMessage
+from email.message import  EmailMessage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import os
 # Models:
 from models.modelUser import ModelUser
@@ -30,7 +33,6 @@ db = MySQL(UNItemsApp)
 login_manager_app = LoginManager(UNItemsApp)
 folder = os.path.join(os.path.dirname(__file__), 'uploads/profile')
 UNItemsApp.config['folder'] = folder
-
     # ==============================
     # Rutas principales
     # ==============================
@@ -51,18 +53,35 @@ def after_request(response):
 def uploads(imgprofile):
     return send_from_directory(UNItemsApp.config['folder'], imgprofile)
 
-@UNItemsApp.route('/')
+@UNItemsApp.route('/', methods = ['GET', 'POST'])
 def index():        
+    if request.method == 'POST':
+        date = request.form['date']
+        content = request.form['content']
+
+        addComments = db.connection.cursor()
+        query = "INSERT INTO comments (date, content) VALUES (%s, %s)"
+        addComments.execute(query, (date, content))
+        db.connection.commit()
+    flash("Comentario agregado")
     return render_template('landing-home.html')
     
     
-    # ==============================
-    # Rutas administrador y modales
-    # ==============================
+# ==============================
+# Rutas administrador y modales
+# ==============================
 @UNItemsApp.route('/admin')
 @login_required
 def admin():
     return render_template('admin.html')
+
+@UNItemsApp.route('/admin-view', methods = ['GET', 'POST'])
+@login_required
+def admin_view():
+    cursor = db.connection.cursor()
+    cursor.execute("SELECT * FROM user")
+    data = cursor.fetchall()
+    return render_template('admin-view.html', user = data)
 
 @UNItemsApp.route('/admin-operations', methods = ['GET', 'POST'])
 @login_required
@@ -98,7 +117,7 @@ def admin_register():
         regUser.execute("INSERT INTO user (username, email, password, auth, imgprofile) VALUES (%s, %s, %s, %s, %s)", (username, email, hash, auth, newNameFoto))
         db.connection.commit()
         
-        msg = Message(subject="Bienvenido a Number Six", recipients=[email], html=render_template ("mail-template.html"))
+        msg = Message(subject="Bienvenido a UNItems", recipients=[email], html=render_template ("mail-template.html"))
         mail.send(msg)
         
         flash('Usuario agregado exitosamente')
@@ -207,7 +226,9 @@ def comments_operations():
     data = cursor.fetchall()
     return render_template('comments-operations.html', comments = data)
 
-
+@UNItemsApp.route('/welcomeMail')
+def welcomeMail():
+    return render_template('welcomeMail.html')
 @UNItemsApp.route('/register')
 def register():
     return render_template('register.html')
@@ -216,29 +237,41 @@ def register():
 def login():
     return render_template('login.html')
 
-
-
     # ==============================
     # Registro
     # ==============================
-@UNItemsApp.route('/loginRegister', methods=['GET', 'POST'])
-def loginRegister():
+
+@UNItemsApp.route('/registerUser', methods=['GET', 'POST'])
+def registerUser():
     if request.method == 'POST':
+        fullname = request.form['fullname']
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         hash = generate_password_hash(password) 
 
-        regUser = db.connection.cursor()
-        query = "INSERT INTO user (username, email, password) VALUES (%s, %s, %s)"
-        regUser.execute(query, (username, email, hash))
+        # Validación
+        existing_user = db.connection.execute("SELECT 1 FROM user WHERE username = %s OR email = %s LIMIT 1", (username, email)).fetchone()
+        if existing_user:
+            existing_username = db.connection.execute("SELECT username FROM user WHERE username = %s", (username,)).fetchone()
+            existing_email = db.connection.execute("SELECT email FROM user WHERE email = %s", (email,)).fetchone()
+            if existing_username:
+                flash("El nombre de usuario ya está en uso.")
+                return render_template("login.html", error="Nombre de usuario repetido")
+            if existing_email:
+                flash("El correo electrónico ya está en uso.")
+                return render_template("login.html", error="Correo electrónico repetido")
+        addUser = db.connection.cursor()
+        query = "INSERT INTO user (fullname, username, email, password) VALUES (%s, %s, %s, %s)"
+        addUser.execute(query, (fullname, username, email, hash))
         db.connection.commit()
 
-        msg = Message(subject="Bienvenido a UNItems", recipients=[email], html=render_template ("mail-template.html"))
+        # Enviar correo de bienvenida
+        msg = Message(subject="Bienvenido a UNItems, {}".format(fullname), recipients=[email], html=render_template("welcomeMail.html", fullname=fullname))
         mail.send(msg)
         return render_template('login.html')
     else:
-        return render_template('register.html')
+        return render_template('login.html')
 
     # ==============================
     # Login
@@ -251,10 +284,14 @@ def loginUser():
         if logged_user is not None:
             if logged_user.password:
                 login_user(logged_user)
+                session['username'] = logged_user.username
+                session['email'] = logged_user.email
+                session['auth'] = logged_user.auth
+                
                 if logged_user.auth == 'A':
                     return redirect(url_for('admin'))
                 else:
-                    return redirect(url_for('home'))
+                    return redirect(url_for('index'))
             else:
                 flash("Contraseña incorrecta...")
                 return render_template('login.html')
@@ -262,7 +299,7 @@ def loginUser():
             flash("El usuario no se encuentra...")
             return render_template('login.html')
     else:
-            return render_template('login.html')
+        return render_template('login.html')
 
 # ========================
 # Rutas de usuario ------>
@@ -270,13 +307,26 @@ def loginUser():
 @UNItemsApp.route('/perfilUser')
 @login_required
 def perfilUser():
-    return render_template('404.html')
-    if not current_user.is_authenticated: # Definir current_user
-        flash("Necesitas iniciar sesión para ver más")
-        return render_template('login.html')
-    else:
-        return render_template('perfilUser.html')
-            
+    return render_template('perfilUser.html')
+
+@UNItemsApp.route('/notification', methods=['POST'])
+def notification():
+    """
+    Esta función maneja la recepción de notificaciones de Telegram.
+    
+    Enviará un mensaje de respuesta en caso de que se reciba una notificación.
+    """
+    update = request.get_json()
+    if 'message' in update:
+        message_text = update['message']['text']
+        chat_id = update['message']['chat']['id']
+        response = "¡Hola! Has recibido el mensaje: {0}".format(message_text)
+        data = {"chat_id": chat_id, "text": response}
+        send_message_url = "https://api.telegram.org/bot{0}/sendMessage".format(os.environ.get('TELEGRAM_BOT_TOKEN'))
+        requests.post(send_message_url, json=data)
+    return '', 200
+    return render_template('perfilUser.html')
+
 
 @UNItemsApp.route('/edit-user', methods = ['GET', 'POST'])
 @login_required
@@ -285,26 +335,48 @@ def edit_user():
 # ========================
 # Ruta del botón ------>
 # ========================
-@UNItemsApp.route('/edit-user-update/<int:id>', methods = ['POST'])
-def update_user(id,):
+
+@UNItemsApp.route('/edit-user-update/<int:id>', methods=['POST'])
+def update_user(id):
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
-        password = request.form['password']
-        auth = request.form['auth']
-        hash = generate_password_hash(password)
-        img = request.files['img']    
-        updateUser = db.connection.cursor()
+        fullname = request.form['fullname']
+        age = request.form['age']
+        schoolgrade = request.form['schoolgrade']
+        user_resume = request.form['user_resume']
 
-        if request.files.get('img'):
-            folder = '/UNItemsApp/uploads/profile{}'.format(img)
-            if os.path.exists(folder):
-                os.remove(folder)
+        # Chequeo de unicidad de username y email excepto si es el mismo usuario
+        cursor = db.connection.cursor()
+        query = ("SELECT COUNT(*) FROM user WHERE "
+                 "username = %s AND id != %s OR "
+                 "email = %s AND id != %s")
+        data = (username, id, email, id)
+        cursor.execute(query, data)
+        count = cursor.fetchone()[0]
+        cursor.close()  # Cerrar el cursor
+        if count > 0:
+            error = 'El nombre de usuario o el correo electrónico ya están en uso.'
+            flash(error, 'error')
+            return redirect(url_for('edit_user', id=id))
+
+        # Actualizar datos
+        updateUser = db.connection.cursor()
+        query = "UPDATE user SET username = %s, email = %s, fullname = %s, age = %s, schoolgrade = %s, user_resume = %s WHERE id = %s"
+        datos = (username, email, fullname, age, schoolgrade, user_resume, id)
+        updateUser.execute(query, datos)
+        db.connection.commit()
+        # Actualizar imagen de perfil
+        if 'img' in request.files:
             img = request.files['img']
-            filename = secure_filename(img.filename)
-            img.save(os.path.join(UNItemsApp.config['folder'], filename))
-            updateUser.execute("UPDATE user SET username = %s, email = %s, password = %s, auth = %s, imgprofile = %s WHERE id=%s", (username, email, hash, filename, id,))
-            db.connection.commit()
+            if img.filename != '':
+                folder = '/UNItemsApp/uploads/profile{0}'.format(id)
+                if os.path.exists(folder):
+                    os.remove(folder)
+                filename = secure_filename(img.filename)
+                img.save(os.path.join(UNItemsApp.config['folder'], filename))
+                updateUser.execute("UPDATE user SET imgprofile = %s WHERE id=%s", (filename, id))
+                db.connection.commit()
     flash("Actualización de datos completada")
     return redirect(url_for('perfilUser'))
 
@@ -315,24 +387,22 @@ def update_user(id,):
 @UNItemsApp.route('/comments', methods = ['GET', 'POST'])
 @login_required
 def comments():
+    """
+    A route decorator that handles the '/comments' endpoint. This function is used to display the 'comments.html' template.
+    
+    This route supports both GET and POST requests. The function is decorated with the '@login_required' decorator, which means that the user must be logged in to access this route.
+    
+    Returns:
+        A rendered template of 'comments.html'.
+    """
     return render_template('comments.html')
 
 # ========================
 # Ruta del botón ------>
 # ========================
-@UNItemsApp.route('/add-comments', methods = ['GET', 'POST'])
-@login_required
-def add_comments():
-    if request.method == 'POST':
-        date = request.form['date']
-        contents = request.form['contents']
-
-        addComments = db.connection.cursor()
-        query = "INSERT INTO comments (date, contents) VALUES (%s, %s)"
-        addComments.execute(query, (date, contents))
-        db.connection.commit()
-    flash("Comentario agregado")
-    return redirect(url_for('perfilUser'))
+@UNItemsApp.route('/comming-soon')
+def comming_soon():
+    return render_template('comming-soon.html')
 
 @UNItemsApp.route('/logout')
 @login_required
