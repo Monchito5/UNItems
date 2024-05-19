@@ -1,14 +1,19 @@
-{% extends "layout-for-login.html" %}
-{% block titulo %} UNItems - Inicio de sesión {% endblock %}
+{% extends "layout.html" %}
+{% block titulo %} Inicio de sesión {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}" />
-{% endblock %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}"/>
+{% endblock %} 
+
+{% if current_user.is_anonymous %}
+{% block navbar %} {% endblock %}
+{% block footer %} {% endblock %}
+{% endif %}
 
 {% block contenido %}
 <div class="container">
   <div class="forms-container">
-    <div class="signin-signup">
+    <div class="signin-signup"> 
       <form action="/loginUser" method="post" class="sign-in-form">
         {% with messages = get_flashed_messages() %}
 

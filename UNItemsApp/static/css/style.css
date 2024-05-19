@@ -166,8 +166,32 @@ body {
 
 /* Carrousel */
 .carousel-item img {
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90vh;
     object-fit: cover;
+    object-position: 50% 50%;
+    margin: 0;
+    padding: 0rem;
+}
+
+
+/* Collab plantilla */
+.orderboxColaboradores{
+    margin-top: 1in;
+}
+
+.container__box-cardPrimaryCollab{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: -1.5in;
+    margin-right: -1.5in;
+}
+
+.teamImg{
+    width: 4.8in;
+    height: 3in;
+    border: 5px red dotted;
 }
 
