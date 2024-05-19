@@ -31,12 +31,13 @@
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input name="password" type="password" placeholder="Contraseña" required>
+          <input class="password-input" type="password" id="passwordInput" name="password" placeholder="Contraseña" required>
+          <button type="button" id="passwordToggle" class="btn password-toggle"><i class="far fa-eye-slash"></i></button>
         </div>
         <input type="submit" value="Continuar" class="btn-b solid">
       </form>
 
-      <form action="/loginRegister" class="sign-up-form" method="post">
+      <form action="/registerUser" class="sign-up-form" method="post">
         <h2 class="title">Regístrate</h2>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-field">
@@ -53,7 +54,8 @@
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input name="password" type="password" placeholder="Contraseña" required>
+          <input class="password-input" type="password" id="passwordInputR" name="password" placeholder="Contraseña" required>
+          <button type="button" id="passwordToggleR" class="btn password-toggle"><i class="far fa-eye-slash"></i></button>
         </div>
           <br>
             <div class="form-check check-p">
