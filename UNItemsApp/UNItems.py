@@ -304,6 +304,10 @@ def edit_user():
 def colaboradores():
     return render_template('colaboradores.html')
 
+@UNItemsApp.route('/feed', methods = ['GET', 'POST'])
+def feed():
+    return render_template('feed.html')
+
 # ========================
 # Ruta del botón ------>
 # ========================

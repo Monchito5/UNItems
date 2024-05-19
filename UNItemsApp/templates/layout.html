@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{{url_for('static', filename='js/color-modes.js')}}"></script>
+    <script src="{{url_for('static', filename='js/scroll.js')}}"></script>
     <link rel="shortcut icon" href="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='navbar-top-fixed.css')}}">
@@ -47,7 +48,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" aria-current="page" href="#"  tabindex="-1">Blog</a>
+              <a class="dropdown-item" aria-current="page" href="#"  tabindex="-1">Feed</a>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -114,7 +115,7 @@
               <a class="nav-link active" href="/us">Colaboradores</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Blog</a>
+              <a class="nav-link active" href="/feed">Feed</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="#">Ayuda</a>
