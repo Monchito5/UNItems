@@ -332,11 +332,6 @@ def notification():
 @login_required
 def edit_user():
     return render_template('edit-user.html')
-
-@UNItemsApp.route('/Us', methods = ['GET', 'POST'])
-def colaboradores():
-    return render_template('colaboradores.html')
-
 # ========================
 # Ruta del botón ------>
 # ========================
@@ -429,6 +424,20 @@ def passwordR(id,):
     else:
         flash('¡Algo salió mal!')
     return render_template('passwordRecovery.html')
+
+
+@UNItemsApp.route('/us', methods = ['GET', 'POST'])
+def colaboradores():
+    return render_template('colaboradores.html')
+
+@UNItemsApp.route('/feed', methods = ['GET', 'POST'])
+def feed():
+    return render_template('feed.html')
+
+@UNItemsApp.route('/Us', methods = ['GET', 'POST'])
+def colaboradores():
+    return render_template('colaboradores.html')
+
 
 @UNItemsApp.errorhandler(404)
 def errorhandler401(e):
