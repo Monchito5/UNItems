@@ -83,6 +83,9 @@ body {
 /*Estilos generales - Tarjetas */
 
 .box__card-primary{
+    height: 7.25rem;
+    width: 100%;
+    padding: 1.25rem;
     border: 1px solid #e6e6e6;
     border-radius: 1.25rem;
     transition: all 300ms;
@@ -99,12 +102,21 @@ body {
     font-weight: 500;
 }
 
-
-/*Servicios*/
-
-.card__service img{
-    width: 3.75rem;
+.card__service-img{
+    width: 4.75rem;
 }
+
+.card__service-i{
+    font-size: 1.5rem;
+    margin-top: 1.25rem;
+    cursor: pointer;
+    color: var(--color_text-primary);
+}
+
+.card__service-i:hover{
+    color: var(--color_text-secondary);
+}
+
 
 /* Anim */
 .img__heroe {
@@ -116,20 +128,18 @@ body {
 }
 
 @keyframes levitate {
-    0%   {transform: translateY(8px);}
-    25%  {transform: translateY(-6px);}
-    100% {transform: translateY(8px);}
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
 }
 
-.card__service i{
-    font-size: 1.5rem;
-    margin-top: 1.25rem;
-    cursor: pointer;
-    color: var(--color_text-primary);
-}
 
 @media (min-width: 768px) {
-    .card__service i{
+    .card__service-i{
         font-size: 1.75rem;
         margin-top: 1.5rem;
     }
@@ -166,12 +176,10 @@ body {
 
 /* Carrousel */
 .carousel-item img {
-    width: 90vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    object-position: 50% 50%;
-    margin: 0;
-    padding: 0rem;
+    object-position: center;
 }
 
 
@@ -189,9 +197,16 @@ body {
     margin-right: -1.5in;
 }
 
-.teamImg{
-    width: 4.8in;
-    height: 3in;
-    border: 5px red dotted;
+.teamImg img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; 
+    margin: auto; 
 }
 
+.hero {
+    background-color: #bf4000d0; 
+    color: #ffffff;
+    padding: 50px; 
+    text-align: center;
+}

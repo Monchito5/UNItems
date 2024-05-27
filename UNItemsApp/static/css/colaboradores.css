@@ -1,0 +1,53 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card {
+    flex: 1 0 300px;
+    margin: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.19), 0px 6px 6px rgba(0,0,0,0.23);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+    box-shadow: 0px 14px 28px rgba(0,0,0,0.25), 0px 10px 10px rgba(0,0,0,0.22);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card p {
+    padding: 15px;
+    margin: 0;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.text-content {
+    text-align: center; /* Agregado para centrar el texto */
+}
+
+.contenedor img {
+    width: 300px; /* puedes ajustar esto a la medida que necesites */
+    margin-right: 20px;
+}
+
+.text-content h1, .text-content p {
+    margin: 0;
+}
+
+.contenedor{
+    margin-top: 1in;
+    margin-bottom: 1in;
+    display: flex;
+    align-items: center;
+}

@@ -1,6 +1,7 @@
 import ssl
 class config:
-    secret = 'dakgk395ujkfmdkji4jijo3jigfmkgdmwñm'
+    # False Secret no se espante compa
+    secret = 'dakgk395ujkfmdkji4jijo3jigfmkgdmwñm' 
     SECRET_KEY = 'secret'
     
 class DevelompentConfig(config):

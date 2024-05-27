@@ -1,34 +1,58 @@
 {% extends "layout.html" %}
-{% block titulo %} Comming Soon! {% endblock %}
+{% block titulo %} Feed {% endblock %}
 
 {% block css %}
 {% endblock %}
 
 {% block contenido %}
-<div class="px-4">
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h1 class="display-1">En construcción...</h1>
+<div class="container-sm py-3 mt-2">
+  <div class="highlight">
+      <div class="mx-auto p-2">
+          <div class="row mb-3 container-sm themed-container">
+            {% for feed_item in feeds %}
+                  <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                      <div class="card shadow-lg h-100 border">
+                          {% for feed_item in feeds %}
+                          <div class="card shadow-lg h-100 border">
+                              <div class="card-body">
+                                  <h5 class="card-title">
+                                      {% if feed_item.author %}
+                                      <span class="badge btn btn-bd-primary fs-6 border">
+                                          {{ feed_item.author.username }}
+                                      </span>
+                                      <span class="badge fs-5 border">
+                                          {{ feed_item.title }}
+                                      </span>
+                                      {% else %}
+                                      <span class="badge btn btn-bd-primary fs-6 border">
+                                          anónimo
+                                      </span>
+                                      {% endif %}
+                                  </h5>
+                                  <p class="card-text">{{ feed_item.content }}</p>
+                                  {% if feed_item.imgcontent %}
+                                  <img class="img-thumbnail img-fluid" src="{{ url_for('feed_image', feed_id=feed_item.feed_id) }}" width="420" height="480" loading="lazy" alt="preview">
+                                  {% endif %}
+                              </div>
+                    <div class="card-footer text-center">
+                        <small>
+                            {% if feed_item.datepublicate %}
+                                {{ feed_item.datepublicate.strftime("%A, %d %B %Y - %H:%M") }}
+                            {% else %}
+                                at an unknown time
+                            {% endif %}
+                        </small>
+                    </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+            {% endfor %}
+          </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <h3 class="fw-light">¡Estamos trabajando en algo especial para ti!<br />Queremos que disfrutes de la experiencia, pero aún no estamos listos para mostrarte el resultado.</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <img src="{{url_for('static', filename='images/features/contructores.jpg')}}" alt="Imagen de relleno" class="img-fluid rounded-3">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <p class="lead">Te prometemos que el resultado será increíble. ¡Te estamos anunciando en todas las redes sociales donde se puede compartir una imagen! No te pierdas ese anuncio, ¡y que disfrutes de tus próximas actualizaciones!</p>
-      </div>
-    </div>
   </div>
 </div>
+
 {% endblock %}
 
 {% block js %}{% endblock %}
