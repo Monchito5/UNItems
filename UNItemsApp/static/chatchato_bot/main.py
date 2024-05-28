@@ -1,7 +1,7 @@
 import telebot
 
 # ======= Telegram Chat BOT
-TOKEN = '7152532558:AAFRvXsNRyPIffPfynPWke6rn1qcRVrE8jE'
+TOKEN = 'TOKEN'
 bot = telebot.TeleBot(token=TOKEN)
 
 @bot.message_handler(commands=['start'])
