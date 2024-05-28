@@ -1,0 +1,12 @@
+.cuadro-body-principal{
+    display: flex;
+    gap: 1px;
+}
+
+.columnas-body-principal{
+    width: 33%;
+    min-height: 6in;
+    margin: auto;
+    border: 1em;
+    background-color: aqua;
+}

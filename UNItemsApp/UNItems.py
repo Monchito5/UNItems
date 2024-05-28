@@ -426,69 +426,6 @@ def passwordR(id,):
         flash('¡Algo salió mal!')
     return render_template('passwordRecovery.html')
 
-
-@UNItemsApp.route('/us', methods = ['GET', 'POST'])
-def collab():
-    return render_template('collab.html')
-
-@UNItemsApp.route('/faqs', methods = ['GET', 'POST'])
-def faqs():
-    return render_template('faqs.html')
-
-@UNItemsApp.route('/news', methods = ['GET', 'POST'])
-def news():
-    return render_template('news.html')
-
-@UNItemsApp.route('/feed', methods = ['GET', 'POST'])
-@login_required
-def feed():
-    cursor = db.connection.cursor()
-    cursor.execute("SELECT * FROM feeds")
-    data = cursor.fetchall()
-    return render_template('feed.html', feeds = data)
-
-@UNItemsApp.route('/send-feed', methods = ['GET', 'POST'])
-@login_required
-def send_feed():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
-        imgcontent = request.files['imgcontent']
-        # Guardarimagen del post
-        if imgcontent and allowed_file(imgcontent.filename, UNItemsApp.config['ALLOWED_EXTENSIONS']):
-            filename = secure_filename(imgcontent.filename)
-            imgcontent.save(os.path.join(UNItemsApp.config['folder'], filename))
-            imgcontent = filename
-        else:
-            flash('El tipo de archivo no es permitido')
-            return redirect(url_for('feed'))
-
-        # current_user es un objeto que se encarga de la autenticacion de los usuarios
-        author_id = current_user.get_id()
-
-        try:
-            sendFeed = db.connection.cursor()
-            sendFeed.execute("INSERT INTO feeds (title, content, imgcontent, author_id) VALUES (%s, %s, %s, %s)", (title, content, imgcontent, author_id))
-            db.connection.commit()
-        except Exception as e:
-            db.connection.rollback()
-            flash('Ha ocurrido un error al guardar el post')
-            return redirect(url_for('feed'))
-
-        db.connection.commit()
-        return redirect(url_for('feed'))
-    return render_template('feed.html')
-
-def allowed_file(filename, ALLOWED_EXTENSIONS):
-    """
-    Comprueba si un archivo tiene una extension valida
-    """
-    return '.' in filename and \
-           filename.split('.')[-1].lower() in ALLOWED_EXTENSIONS
-
-@UNItemsApp.errorhandler(500)
-def errorhandler500(e):
-    return render_template('500.html')
 @UNItemsApp.errorhandler(404)
 def errorhandler401(e):
     return render_template('Error401.html')
