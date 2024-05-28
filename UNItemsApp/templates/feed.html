@@ -1,10 +1,305 @@
 {% extends "layout.html" %}
-{% block css %}{% endblock %}
-{% block titulo %} UNItems {% endblock %}
-
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/feed.css')}}">
+{% endblock %}
+{% block titulo %} Feed {% endblock %}
+<div class="container-fluid visually-hidden">
+{% block navbar %} {% endblock %}    
+</div>
 
 {% block contenido %}
-<div id="feed">
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="collapsed">
+      <div class="mt-3 container">
+        <div id="toggle-sidebar" class="btn btn-bd-primary rounded-pill m-2">
+            <i class="fas fa-bars"><span class="visually-hidden">Toggle Sidebar</span></i>
+        </div>
+        <div id="sidebar-menu-collapsed" class="mt-2 container">
+            <a class="mt-3 nav-link link-body-emphasis text-center d-flex flex-column align-items-center justify-content-center" href="{{ ('/') }}">
+                <img src="{{url_for('static', filename='icons/home.svg')}}" alt="index">                
+            </a>
+            <a class="mt-3 nav-link link-body-emphasis text-center d-flex flex-column align-items-center justify-content-center" href="{{ ('/perfilUser') }}">
+                <img src="{{url_for('static', filename='icons/user.svg')}}" alt="perfil">
+            </a>
+            <a class="mt-3 nav-link link-body-emphasis text-center d-flex flex-column align-items-center justify-content-center" href="#">
+                <button type="button" class="btn border-0" data-bs-toggle="modal" data-bs-target="#publi">
+                    <img src="{{url_for('static', filename='icons/edit.svg')}}" alt="publi">
+                </button>
+            </a>
+        </div>
+      </div>
+      <div class="container text-start d-flex flex-column align-items-start justify-content-center">
+        <!-- Dropdown menu -->
+        <ul class="list-unstyled fw-normal pb-1 text-start">
+            <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                Home
+                </button>
+                <div class="collapse" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <li><a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{{ ('/profile') }}">Mi perfil</a></li>
+                        <li><a class="link-body-emphasis d-inline-flex text-decoration-none rounded" href="{{ ('/logout') }}">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/') }}">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/news') }}">Noticias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/us') }}">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/faqs') }}">Ayuda</a>
+            </li>
+        </ul>
+      </div>
+      <hr>
+      <div class="container text-center mt-2 pb-2 profile d-flex flex-column align-items-center">
+        <img src="/uploads/profile/{{ current_user.imgprofile }}" alt="Profile Image" class="profile-img">
+        <div class="username">{{ current_user.username }}</div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <button type="button" class="regisPubliButton" data-bs-toggle="modal" data-bs-target="#publi">Subir material</button>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ ('/feed') }}">Publicaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/perfilUser') }}">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://t.me/chatchato_bot/unitemsBOT"><button type="button" class="telegram-btn-link">Ir al chatbot</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ ('/logout') }}">Cerrar sesión</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="pt-3 container d-flex flex-column align-items-center scrollarea" id="content-wrapper">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br/>
+        {% for message in messages %}
+        <div class="alert alert-secondary alert-dismissible" role="alert">
+            <i class="bi" data-feather="alert-triangle"></i>
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <!-- Publicación -->
+            <div class="mb-3 post-card card">
+                <div class="card-body">
+                    <div class="row g-0 align-items-start">
+                        <div class="col text-start d-flex justify-content-start">
+                            <!-- Menú desplegable ver más -->
+                            <div class="btn-group dropdown">
+                                <button class="btn btn-outline btn-bd-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                más
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#update-publi">Editar</a></li>
+                                    <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <datetime class="card-text text-end">(DD/MM/YYYY)</datetime>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
+                </div>
+                <figure class="figure my-2 p-3 clearfix d-flex justify-content-center overflow-hidden">
+                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" class="card-img-top" alt="Post Image">
+                </figure>
+                <hr>
+                <div class="row g-0 my-2 px-3 align-items-center">
+                    <div class="col text-start">
+                        <span class="badge btn btn-bd-primary fs-6 border text-center">
+                            <i class="far fa-heart"></i>
+                            <!-- Ejemplo -->197
+                        </span>
+                    </div>
+                    <div class="col text-end">
+                        <span class="badge btn btn-bd-primary fs-6 border text-end" aria-controls="share" aria-expanded="false">Compartir</span>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div id="right-sidebar-wrapper">
+        <button id="close-right-sidebar" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+        <h5>Noticias</h5>
+        <p>Contenido de noticias...</p>
+        <h5>Usuarios por agregar</h5>
+        <p>Lista de usuarios por agregar...</p>
+    </div>
+    <!-- Modal Agregar publicación -->
+    <div class="modal fade" id="publi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Subir publicación</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="/send-feed" method="POST" enctype="multipart/form-data">
+                <p class="text-center">Aquí puedes subir el material que deseas intercambiar.</p>
+                <p><img src="{{url_for('static', filename='icons/typography.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                </p>
+                <div class="input-group mb-3">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <input name="title" type="text" class="form-control rounded" placeholder="Título" aria-label="Escribe aquí" aria-describedby="button-addon2" required>
+                </div>
+                <p><img src="{{url_for('static', filename='icons/project-roadmap.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                </p>
+                <div class="input-group mb-3">
+                    <input name="content" type="text" class="form-control rounded" placeholder="Descripción" aria-label="Escribe aquí" aria-describedby="button-addon2" required>
+                </div>
+                <p><img src="{{url_for('static', filename='icons/device-camera.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                (Opcional)</p>
+                <div class="input-group mb-3">
+                  <label for="formFile" class="form-label"></label>
+                  <input name="imgcontent" class="form-control" type="file" id="formFile">
+                </div>
+                    <div class="modal-footer border-top">
+                      <button class="btn btn-outline-success ms-1" type="submit" id="button-addon2" value="Enviar">Enviar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Actualizar Publicación -->
+    <div class="modal fade" id="update-publi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar publicación</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="/update-feed" method="POST" enctype="multipart/form-data">
+                <p class="text-center">Actualiza el contenido de la publicación.</p>
+                <p><img src="{{url_for('static', filename='icons/typography.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                </p>
+                <div class="input-group mb-3">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <input name="title" type="text" class="form-control rounded" placeholder="Título" aria-label="Escribe aquí" aria-describedby="button-addon2" required/>
+                </div>
+                <p><img src="{{url_for('static', filename='icons/project-roadmap.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                </p>
+                <div class="input-group mb-3">
+                    <input name="content" type="text" class="form-control rounded" placeholder="Descripción" aria-label="Escribe aquí" aria-describedby="button-addon2" required/>
+                </div>
+                <p><img src="{{url_for('static', filename='icons/device-camera.svg')}}" alt="" width="25" height="25" class="d-inline-block align-text-initial m-1" style="opacity: 0.3;">
+                (Opcional)</p>
+                <figure class="figure my-2 p-3 clearfix d-flex justify-content-center overflow-hidden">
+                    <img src="{{url_for('static', filename='images/Cover/hero-img.png')}}" class="card-img-top" alt="Post Image">
+                </figure>
+                <div class="input-group mb-3">
+                  <label for="formFile" class="form-label"></label>
+                  <input name="imgcontent" class="form-control" type="file" id="formFile">
+                </div>
+                    <div class="modal-footer border-top">
+                      <button class="btn btn-outline-success ms-1" type="submit" id="button-addon2" value="Enviar">Enviar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Eliminar Publicación -->
+    <div class="modal fade" id="delete-publi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar publicación</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="/delete-feed" method="POST" enctype="multipart/form-data">
+                <p class="text-center">¿Estas seguro de que deseas eliminar esta publicación?</p>
+                <div class="modal-footer border-top">
+                      <button class="btn btn-outline-success ms-1" type="submit" id="button-addon2" value="Enviar">Eliminar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
 </div>
-{% endblock %} 
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var loading = false;
+    
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+                if (loading) return;
+                loading = true;
+    
+                // Simulación de carga de datos
+                setTimeout(function() {
+                    // Aquí iría la lógica para cargar más publicaciones desde el servidor
+                    // Por ejemplo, puedes usar AJAX para hacer una petición al servidor y cargar más tarjetas
+                    $('#content-wrapper').append(`
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                    `);
+                    loading = false;
+                }, 1000); // Simulación de retraso en la carga
+            }
+        });
+      
+    // Toggle sidebar
+    $('#toggle-sidebar').click(function() {
+        $('#sidebar-wrapper').toggleClass('collapsed');
+    });
+
+    // Toggle right sidebar
+    $('#close-right-sidebar').click(function() {
+        $('#right-sidebar-wrapper').toggleClass('collapsed');
+    });
+
+    // Open right sidebar on mobile
+    if ($(window).width() <= 768) {
+        // Toggle right sidebar
+        $('#toggle-right-sidebar').click(function() {
+            $('#right-sidebar-wrapper').toggleClass('open');
+        });
+    }
+
+});
+</script>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block js %}{% endblock %}

@@ -11,11 +11,15 @@
     <div class="row align-items-center">
       <div class="col-md-4 text-center"> <!-- Foto de perfil -->
         <div class="avatar-perfil mb-3"> 
-          <img class="img-thumbnail" id="img-perfil" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo" loading="lazy" style="filter: blur(10px); animation: fadeIn 1s ease-in-out forwards;">
+          <img class="img-thumbnail" id="img-perfil" src="/uploads/profile/{{ current_user.imgprofile }}" alt="photo" loading="lazy">
           <style>
             @keyframes fadeIn {
               0% { opacity: 0; }
               100% { opacity: 1; filter: blur(0); }
+            }
+            .avatar-perfil {
+              animation: fadeIn 1s ease-in-out forwards;
+              background-color: rgba(255, 255, 255, 0.4);
             }
           </style>
         </div>
@@ -106,7 +110,7 @@
         <label for="user_resume" class="form-label">Biografía
           <span>(Maximo: 120 caracteres)</span>
         </label>
-        <textarea name="user_resume" class="form-control border-secondary" id="user_resume" cols="10" rows="5" maxlength="120" required></textarea>
+        <textarea name="user_resume" class="form-control border border-1 border-danger-subtle" id="user_resume" cols="10" rows="5" maxlength="120" required></textarea>
       </div>
       <br><br>
       <div class="col-12 mb-4">

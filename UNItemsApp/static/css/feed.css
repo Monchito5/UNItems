@@ -1,26 +1,277 @@
-.personaje {
-    /* Estilos básicos de la tarjeta */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 20%;
-    border-radius: 5px;
-    margin-left: 40%;
-    margin-top: 35px;
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+#sidebar-wrapper {
+  flex: 0 0 250px;
+  background: #eee6e3;
+  border-right: 1px solid #ddd;
+  transition: all 0.3s;
+  animation: gradient 2s ease infinite;
+  /* Scroll */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+#sidebar-wrapper.collapsed #toggle-sidebar {
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+width: 2.5rem;
+height: 2.5rem;
+}
+#sidebar-wrapper:not(.collapsed) #toggle-sidebar {
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+top: 0;
+left: 0;
+z-index: 1;
+}
+/* Mostrar el menu #sidebar-menu-collapsed solo cuando no se colapsa */
+#sidebar-wrapper:not(.collapsed) #sidebar-menu-collapsed {
+display: none;
 }
 
-.personaje:hover {
-    /* Efecto de sombra al pasar el mouse sobre la tarjeta */
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#sidebar-wrapper .profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+#sidebar-wrapper .username {
+  font-size: 18px;
+  font-weight: bold;
+}
+#sidebar-wrapper .nav-item {
+  margin-bottom: 10px;
+}
+#sidebar-wrapper .nav-link {
+  color: #333;
+  transition: all 0.3s;
+}
+#sidebar-wrapper .nav-link:hover {
+  color: #e26136;
+}
+#sidebar-wrapper .nav-link .bi {
+  margin-right: 5px;
+}
+#sidebar-wrapper.collapsed {
+flex: 0 0 0;
+padding: 0;
+border-right: none;
+}
+#sidebar-wrapper.collapsed .profile-img,
+#sidebar-wrapper.collapsed .username,
+#sidebar-wrapper.collapsed .nav-item,
+#sidebar-wrapper.collapsed .nav-link,
+#sidebar-wrapper.collapsed .list-unstyled {
+display: none;
+}
+#content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+#right-sidebar-wrapper {
+  flex: 0 0 250px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  transition: all 0.3s;
+}
+#right-sidebar-wrapper.collapsed {
+  flex: 0 0 0;
+  padding: 0;
+  border-left: none;
+  display: none;
+}
+#toggle-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  left: calc(100% - 4.12rem);
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+#close-right-sidebar {
+  position: relative;
+  top: 10px;
+  left: calc(100% - 30px);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+}
+.regisPubliButton {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.telegram-btn-link {
+  text-decoration: none;
+  color: #fff;
+  background-color: #0088cc;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.dropdown-toggle { outline: 0; }
+
+.btn-toggle {
+padding: .25rem .5rem;
+font-weight: 600;
+color: var(--bs-emphasis-color);
+background-color: transparent;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+color: rgba(var(--bs-emphasis-color-rgb), .85);
+background-color: var(--bs-tertiary-bg);
 }
 
-.personaje img {
-    /* Estilos para la imagen del personaje */
-    border-radius: 5px 5px 0 0;
-    width: 100%;
-    height: auto;
+.btn-toggle::before {
+width: 1.25em;
+line-height: 0;
+content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+transition: transform .35s ease;
+transform-origin: .5em 50%;
 }
 
-.personaje .container {
-    /* Estilos para el contenedor del nombre del personaje */
-    padding: 2px 16px;
+[data-bs-theme="dark"] .btn-toggle::before {
+content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.btn-toggle[aria-expanded="true"] {
+color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+transform: rotate(90deg);
+}
+.btn-toggle[aria-expanded="false"]::before {
+transform: rotate(0deg);
+}
+
+.btn-toggle-nav a {
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+.bd-mode-toggle {
+  z-index: 1500;
+}
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+.scrollarea {
+  overflow-y: auto;
+}
+.post-card {
+  width: 36rem;
+}
+.post-card img {
+  width: 100%;
+  height: auto;
+}
+.post-card .card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.post-card .card-text {
+  font-size: 16px;
+  color: #555;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  overflow-y: auto;
+}  
+#content-wrapper {
+  display: none;
+}
+#sidebar-wrapper:not(.collapsed) #content-wrapper {
+  display: block;
+}
+#sidebar-wrapper hr {
+  display: none;
+}
+#sidebar-wrapper.collapsed {
+  background: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  height: 4.5rem;
+  margin-bottom: 7rem;
+  overflow-y: hidden;
+  z-index: 1;
+}
+#sidebar-menu-collapsed {
+  display: none;
+}
+#sidebar-wrapper:not(.collapsed) {
+  border-bottom: 1px solid #bab9b9;
+}
+#toggle-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+ #content-wrapper {
+  flex: 0 0 100%;
+  margin-left: 0;
+} 
+.post-card{
+  width: 18.25rem;
+}
+#right-sidebar-wrapper {
+    display: none;
+}
+#right-sidebar-wrapper.open {
+    display: block;
+    position: relative;
+    width: 250px;
+    right: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+}
 }

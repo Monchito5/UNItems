@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+
 {% block css %}{% endblock %}
 {% block titulo %} UNItems {% endblock %}
 {% block contenido %}
@@ -19,9 +20,10 @@
                     <img src="{{ url_for('static', filename='images/Cover/cover_2.jpg')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='images/Cover/cover_3.jpg')}}" class="d-block w-100" alt="...">
+                    <img src="{{ url_for('static', filename='images/Cover/cover_4.jpg')}}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/Cover/cover_5.jpg')}}" class="d-block w-100" alt="...">
                     <img src="{{ url_for('static', filename='images/Cover/cover_5.jpg')}}" class="d-block w-100" alt="...">
                 </div>
             </div>
@@ -41,15 +43,14 @@
     <!-- Generador de confianza -->
     <div class="container text-center mt-5">
         <div class="container p-2 align-items-center">
-            <h1>Te ayudamos a encontrar materiales educativos</h1>
-            <br>
+            <h1>Encuentra todo tipo de materiales educativos</h1>
             <hr>
         </div>
         <div class="row align-items-center">
-            <div class="col col-md-4 col-lg-4 col-xl-4">
+            <div class="mt-2 col col-md-4 col-lg-4 col-xl-4">
                 <div class="card h-100 box__card-primary">
                     <div class="card-body p-2">
-                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
+                        <img class="my-2 card-image" src="{{url_for('static', filename='images/TrustArea/anchor.png')}}" alt="">
                         <h2>Gestión</h2>
                         <p class="card-text">Conectamos a los usuarios para facilitar intercambios, 
                         préstamos y compraventa de materiales educativos.
@@ -57,10 +58,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-md-4 col-lg-4 col-xl-4">
+            <div class="mt-2 col col-md-4 col-lg-4 col-xl-4">
                 <div class="card h-100 box__card-primary">
                     <div class="card-body p-2">
-                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
+                        <img class="my-2 card-image" src="{{url_for('static', filename='images/TrustArea/archive.png')}}" alt="">
                         <h2>Análisis</h2>
                         <p class="card-text">Utilizamos datos para optimizar funcion y servicios, 
                         asegurando una plataforma más eficiente.
@@ -68,10 +69,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-md-4 col-lg-4 col-xl-4">
+            <div class="mt-2 col col-md-4 col-lg-4 col-xl-4">
                 <div class="card h-100 box__card-primary">
                     <div class="card-body p-2">
-                        <img class="card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
+                        <img class="my-2 card-image" src="{{url_for('static', filename='images/TrustArea/user.png')}}" alt="">
                         <h2>Calidad</h2>
                         <p class="card-text">Velamos por la seguridad y la fiabilidad de las transacciones. 
                         Además ofrecemos un entorno confiable y transparente.</p>
@@ -82,7 +83,7 @@
     </div>
 
     <!-- HEROES -->
-    <div class="m-0 p-0 container-fluid bg-color-secondary">
+    <div class="m-0 p-0 container-fluid text-center bg-color-secondary">
         <div class="row align-items-center px-4 pt-5 my-5 text-center">
             <div class="col-md-7">
                 <h1 class="display-4 fw-bold text-body-emphasis">Comunidad</h1>
@@ -91,12 +92,15 @@
                     y beneficiarse mutuamente. Nuestro enfoque se centra en la comodidad, la seguridad y la calidad, 
                     brindando a nuestros usuarios una experiencia confiable y satisfactoria en cada transacción.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                    {% if current_user.is_anonymous %}
                     <a href="{{ ('/login') }}">
                         <button type="button" class="btn btn-bd-primary btn-lg px-4 me-sm-3">Inicia Sesión</button>
                     </a>
+                    {% else %}
                     <a href="{{ ('/comming-soon') }}">
-                        <button type="button" class="btn btn-outline-secondary btn-lg px-4 me-sm-3 fw-bold">Blog</button>
+                        <button type="button" class="btn btn-outline-dark btn-lg px-4 me-sm-3 fw-bold">Blog</button>
                     </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-5">
@@ -109,50 +113,50 @@
         </div>
     </div>
     <!--SERVICIOS-->
-    <div class="container-fluid text-center">
+    <div class="container text-center">
         <hr>
         <div class="container align-items-center">
             <h1>Accede a recursos educativos las 24 horas del día, los 7 días de la semana.</h1>
         </div>
         <div class="row align-items-center">
-            <div class="col">
-                <div class="card__service box__card-primary h-100">
-                    <img src="{{url_for('static', filename='images/Services/grid.png')}}" alt="">
-                    <h2>Sección General</h2>
-                    <p>Materiales de todo tipo</p>
-                    <a href="{{ ('/comming-soon') }}">
+            <div class="mt-2 col">
+                <div class="h-100 card box__card-primary align-items-center">
+                    <img class="my-2 card__service-img" src="{{url_for('static', filename='images/Services/grid.svg')}}" alt="">
+                    <h2>Encuentra todo tipo de materiales</h2>
+                    <p>Sección General</p>
+                    <a href="{{ ('/comming-soon') }}" class="card__service-i">
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/camera.png')}}" alt="">
+            <div class="mt-2 col">
+                <div class="h-100 card box__card-primary align-items-center">
+                    <img class="my-2 card__service-img" src="{{url_for('static', filename='images/Services/camera.svg')}}" alt="">
                     <h2>Vídeo</h2>
                     <p>Contenido multimedia gratuito</p>
-                    <a href="{{ ('/comming-soon') }}">
+                    <a href="{{ ('/comming-soon') }}" class="card__service-i">
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                    <img src="{{url_for('static', filename='images/Services/headphone.png')}}" alt="">
+            <div class="mt-2 col">
+                <div class="h-100 card box__card-primary align-items-center">
+                    <img class="my-2 card__service-img" src="{{url_for('static', filename='images/Services/headphones.svg')}}" alt="">
                     <h2>Audio</h2>
                     <p>Disfruta de la sección de audio que tenemos preparada para ti</p>
-                    <a href="{{ ('/comming-soon') }}">
+                    <a href="{{ ('/comming-soon') }}" class="card__service-i">
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <div class="col">
-                <div class="card__service box__card-primary">
-                <img src="{{url_for('static', filename='images/Services/file.png')}}" alt="">
-                <h2>Libros y Documentos</h2>
-                <p>Aquí reside la biblioteca de la comunidad</p>
-                <a href="{{ ('/comming-soon') }}">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+            <div class="mt-2 col">
+                <div class="h-100 card box__card-primary align-items-center">
+                    <img class="my-3 card__service-img" src="{{url_for('static', filename='images/Services/file.svg')}}" alt="">
+                    <h2>Libros y Documentos</h2>
+                    <p>Aquí reside la biblioteca de la comunidad</p>
+                    <a href="{{ ('/comming-soon') }}" class="card__service-i">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -214,10 +218,10 @@
               <div class="modal-footer">
                 {% if current_user.is_authenticated %}
                     <div class="row mb-3 container themed-container">
-                        <form action="." method="POST">
+                        <form action="/index" method="POST">
                             <div class="input-group mb-3">
                                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                  <input name="contents" type="text" class="form-control rounded" placeholder="Deja un comentario aquí" aria-label="Deja un comentario" aria-describedby="button-addon2">
+                                  <input name="content" type="text" class="form-control rounded" placeholder="Deja un comentario aquí" aria-label="Deja un comentario" aria-describedby="button-addon2">
                                   <button class="btn btn-outline-success rounded-5 ms-1" type="submit" id="button-addon2" value="Enviar">Enviar</button>
                             </div>
                         </form>
@@ -245,9 +249,9 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-center mb-4 mb-lg-3">
                     {% if current_user.is_anonymous %}
                     <a href="{{ ('/login') }}"><button type="button" class="btn btn-bd-primary px-4 me-md-2 fw-bold">Inicia Sesión</button></a>
-                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-secondary px-4 fw-bold">Noticias</button></a>
+                    <a href="{{ ('/blog') }}"><button type="button" class="btn btn-outline-dark px-4 fw-bold">Noticias</button></a>
                     {% else %}
-                    <a href="{{ ('/comming-soon') }}"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Intercambio</button></a>
+                    <a href="{{ ('/comming-soon') }}"><button type="button" class="btn btn-outline-dark btn-lg px-4">Intercambio</button></a>
                     {% endif %}
                 </div>
             </div>
@@ -258,7 +262,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block js %}

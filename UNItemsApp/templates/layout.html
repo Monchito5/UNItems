@@ -1,3 +1,30 @@
+<!--
+  Hey, tú! Debes leer esto antes de comenzar:
+    _______
+   /      /,
+  /      //
+ /______//
+(______(/
+Algunos libros
+    _______
+   /      /,
+  /      //
+ /______//
+(______(/
+son
+    _______
+   /      /,
+  /      //
+ /______//
+(______(/
+rolados aquí
+
+/_/\
+( o.o )
+ > ^ <
+
+-->
+
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="light">
 <head>
@@ -10,7 +37,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     {% block css %}{% endblock %}
-    <title>{% block titulo %} {% endblock %}</title>
+    <title>{% block titulo %}{% endblock %}</title>
 </head>
 <!-- ================================ -->
 <!-- CUERPO DE LA PÁGINA -->
@@ -36,12 +63,15 @@
 <!-- ================================ -->
 <!-- BARRA DE NAVEGACIÓN -->
 <!-- ================================ -->
-<header>
-  {% block navbar %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg" aria-label="Offcanvas navbar large">
-    <div class="container-fluid px-4">
-      <a href="{{ ('/') }}"><img src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" width="40" height="36" class="d-inline-block align-text-top" alt="logo"></a>
-      <a class="navbar-brand" href="{{ ('/') }}">UNItems</a>
+<header class="fixed-top shadow-lg">
+    {% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+    <div class="container-fluid px-4 px-lg-5">
+      <div class="d-flex link-body-emphasis text-center">
+        <a class="navbar-brand" href="{{ ('/') }}"><img class="bi" src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re-hd-shortcut.png')}}" width="38" height="40" alt="logo">
+        UNItems
+        </a>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,17 +82,23 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-around flex-grow-1 pe-3">
+            {% if current_user.is_anonymous %}
             <li class="nav-item">
-              <a class="nav-link active" href="#">Noticias</a>
+              <a class="nav-link active" href="{{ ('/news') }}">Noticias</a>
+            </li>            
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/feed') }}">Feed</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ ('/us') }}">Nosotros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Ayuda</a>
+              <a class="nav-link active" href="{{ ('/faqs') }}">Ayuda</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Perfil
               </a>
               <ul class="dropdown-menu mb-2">
@@ -74,14 +110,14 @@
                 <li class="nav-item">
                   <a class="dropdown-item" href="{{ ('/perfilUser') }}" aria-current="page"><span class="badge btn btn-bd-primary fs-6 border">{{ current_user.username }}</span></a>
                 </li>
-                <li>
-                  <a class="dropdown-item" href="{{ ('/comming-soon') }}"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>
-                </li>
+                <!--<li>-->
+                <!--  <a class="dropdown-item" href="{{ ('/set-webhook') }}"><span class="badge btn btn-bd-primary fs-6 border">Chats</span></a>-->
+                <!--</li>-->
                 <li class="nav-item">
                 <a class="dropdown-item" href="{{ ('/logout') }}" aria-current="page"><span class="badge text-bg-dark fs-6 border">Cerrar Sesión</span></a>
                 </li>
                 {% endif %}
-                {% if current_user.auth=="A" %}
+                {% if current_user.username=="sorum" %}
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -92,7 +128,7 @@
                 {% endif %}
               </ul>
               <!-- Cambiar color -->
-              <li class="nav-item dropdown-center bd-mode-toggle mt-1">
+              <!-- <li class="nav-item dropdown-center bd-mode-toggle mt-1">
                 <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
                   <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
                   <span class="visually-hidden" id="bd-theme-text">Cambiar aspecto</span>
@@ -120,7 +156,7 @@
                     </button>
                   </li>
                 </ul>
-              </li>
+              </li> -->
             </li>
           </ul>
           <!-- <form class="d-flex mt-3 mt-lg-0" role="search">
@@ -131,29 +167,29 @@
       </div>
     </div>
   </nav>
-  {% endblock %}
+{% endblock %}
 </header>
 
-  <main>
+  <main role="main" aria-labelledby="pageTitle">
     {% block contenido %} {% endblock %}
   </main>
+
     {% block footer %}
     <!-- ======================= -->
     <!-- FOOTER -->
     <!-- ======================= -->
-    <div class="container-fluid">
-      <footer class="d-flex flex-wrap justify-content-center align-items-center py-3">
+    <div class="container-fluid py-3">
+      <footer class="d-flex flex-wrap justify-content-center align-items-center border-top">
         <div class="d-flex align-items-center mb-3 mb-md-0">
           <a href="{{ ('/') }}" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-            <img class="bi me-2" width="200" height="115" src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo">
+            <img class="me-2" width="200" height="115" src="{{url_for('static', filename='images/Logo/Unitems-logo.v1.1-re.png')}}" alt="Logo">
           </a>
         </div>
         <ul class="nav col-12 col-md-4 justify-content-center list-unstyled d-flex mb-0">
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Inicio</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Noticias</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Comunidad</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Acerca de</a></li>
+          <li class="nav-item"><a href="{{ ('/') }}" class="nav-link px-2 text-body-secondary">Inicio</a></li>
+          <li class="nav-item"><a href="{{ ('/news') }}" class="nav-link px-2 text-body-secondary">Noticias</a></li>
+          <li class="nav-item"><a href="{{ ('/faqs') }}" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+          <li class="nav-item"><a href="{{ ('/us') }}" class="nav-link px-2 text-body-secondary">Acerca de</a></li>
         </ul>
       </footer>
     </div>

@@ -19,9 +19,11 @@ from email.mime.text import MIMEText
 import os
 # Models:
 from models.modelUser import ModelUser
+from models.modelFeed import ModelFeed
 
 # Entities:
 from models.entities.User import User
+from models.entities.Feeds import Feeds
 
 UNItemsApp = Flask(__name__)
 UNItemsApp.config.from_object(config['development'])
@@ -33,9 +35,8 @@ db = MySQL(UNItemsApp)
 login_manager_app = LoginManager(UNItemsApp)
 folder = os.path.join(os.path.dirname(__file__), 'uploads/profile')
 UNItemsApp.config['folder'] = folder
-    # ==============================
-    # Rutas principales
-    # ==============================
+folder_feeds = os.path.join(os.path.dirname(__file__), 'uploads/feeds')
+UNItemsApp.config['folder_feeds'] = folder_feeds
 @login_manager_app.user_loader
 def load_user(id):
     return ModelUser.get_by_id(db, id)
@@ -424,20 +425,6 @@ def passwordR(id,):
     else:
         flash('¡Algo salió mal!')
     return render_template('passwordRecovery.html')
-
-
-@UNItemsApp.route('/us', methods = ['GET', 'POST'])
-def colaboradores():
-    return render_template('colaboradores.html')
-
-@UNItemsApp.route('/feed', methods = ['GET', 'POST'])
-def feed():
-    return render_template('feed.html')
-
-@UNItemsApp.route('/Us', methods = ['GET', 'POST'])
-def colaboradores():
-    return render_template('colaboradores.html')
-
 
 @UNItemsApp.errorhandler(404)
 def errorhandler401(e):
