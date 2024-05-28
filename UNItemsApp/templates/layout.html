@@ -37,7 +37,7 @@ rolados aquí
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     {% block css %}{% endblock %}
-    {% block titulo %}{% endblock %}
+    <title>{% block titulo %}{% endblock %}</title>
 </head>
 <!-- ================================ -->
 <!-- CUERPO DE LA PÁGINA -->
@@ -167,8 +167,7 @@ rolados aquí
       </div>
     </div>
   </nav>
-  {% endblock %}
-</div>
+{% endblock %}
 </header>
 
   <main role="main" aria-labelledby="pageTitle">
